@@ -85,28 +85,19 @@ $mission_subtitle = mmm_acf( 'about_mission_subtitle', 'We always welcome you to
             <div class="about-values-line"></div>
         </div>
 
-        <div class="about-values-grid">
+        <div class="about-values-content">
             <?php
-            $values = null;
+            $values_content = null;
             if ( function_exists( 'get_field' ) ) {
-                $values = get_field( 'about_values' );
+                $values_content = get_field( 'about_values_content' );
             }
-            if ( ! $values ) {
-                $values = array(
-                    array( 'icon' => 'fa-handshake', 'title' => 'Honesty', 'description' => 'We believe in transparency. No hidden fees, no unnecessary repairs. We treat your vehicle as if it were our own.' ),
-                    array( 'icon' => 'fa-certificate', 'title' => 'Professionalism', 'description' => 'We uphold high standards, using the latest equipment and quality parts to ensure lasting results for every repair.' ),
-                    array( 'icon' => 'fa-user-friends', 'title' => 'Personalized Approach', 'description' => 'Every vehicle and driver is unique. We provide tailored solutions because we understand that your vehicle deserves the best.' ),
-                );
+            if ( ! $values_content ) {
+                $values_content = '<p><strong>Honesty</strong> — We believe in transparency. No hidden fees, no unnecessary repairs. We treat your vehicle as if it were our own.</p>
+                <p><strong>Professionalism</strong> — We uphold high standards, using the latest equipment and quality parts to ensure lasting results for every repair.</p>
+                <p><strong>Personalized Approach</strong> — Every vehicle and driver is unique. We provide tailored solutions because we understand that your vehicle deserves the best.</p>';
             }
-
-            foreach ( $values as $val ) :
+            echo $values_content;
             ?>
-            <div class="about-value-card">
-                <i class="fas <?php echo esc_attr( $val['icon'] ); ?> about-value-icon"></i>
-                <h3 class="about-value-title"><?php echo esc_html( $val['title'] ); ?></h3>
-                <p class="about-value-desc"><?php echo esc_html( $val['description'] ); ?></p>
-            </div>
-            <?php endforeach; ?>
         </div>
     </div>
 </section>

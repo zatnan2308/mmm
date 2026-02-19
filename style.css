@@ -3950,62 +3950,79 @@ button {
     margin: 0 auto;
 }
 
-.about-values-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.about-value-card {
-    background: var(--color-dark);
-    padding: 3rem;
-    transition: background 0.3s;
-}
-
-.about-value-card:hover {
-    background: var(--color-card);
-}
-
-.about-value-icon {
-    font-size: 1.875rem;
-    color: var(--color-gray-600, #4B5563);
-    margin-bottom: 2rem;
-    transition: color 0.3s;
-}
-
-.about-value-card:hover .about-value-icon {
-    color: var(--color-white);
-}
-
-.about-value-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-white);
-    margin-bottom: 1rem;
-}
-
-.about-value-desc {
-    color: var(--color-gray-500);
-    font-size: 0.875rem;
-    font-weight: 300;
-    line-height: 1.75;
-    transition: color 0.3s;
-}
-
-.about-value-card:hover .about-value-desc {
+.about-values-content {
+    max-width: 60rem;
     color: var(--color-gray-400);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.about-values-content p {
+    margin-bottom: 1.25rem;
+}
+
+.about-values-content p:last-child {
+    margin-bottom: 0;
+}
+
+.about-values-content strong,
+.about-values-content b {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.about-values-content h3,
+.about-values-content h4 {
+    font-family: 'Syne', sans-serif;
+    color: var(--color-white);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+}
+
+.about-values-content h3 {
+    font-size: 1.25rem;
+}
+
+.about-values-content h4 {
+    font-size: 1.0625rem;
+}
+
+.about-values-content ul,
+.about-values-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.about-values-content li {
+    margin-bottom: 0.5rem;
+}
+
+.about-values-content a {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.3s;
+}
+
+.about-values-content a:hover {
+    opacity: 0.7;
+}
+
+.about-values-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
 }
 
 @media (min-width: 768px) {
-    .about-values-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
     .about-values-title {
         font-size: 3rem;
+    }
+    .about-values-content {
+        font-size: 1.0625rem;
     }
 }
 
