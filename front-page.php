@@ -169,28 +169,33 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
         }
         if ( ! $services ) {
             $services = array(
-                array( 'icon' => 'fa-wrench',         'title' => 'General Auto Repair',  'description' => 'General diagnostics and repairs for all makes and models.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-dharmachakra',    'title' => 'Tire Service',          'description' => 'Tire replacement, rotation, and balancing for a smooth drive.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-snowflake',       'title' => 'AC & Heating',          'description' => 'Inspection and repair of air conditioning and heating systems.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-arrows-alt-h',    'title' => 'Wheel Alignment',       'description' => 'Precision wheel alignment to enhance driving stability.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-compact-disc',    'title' => 'Brake Services',        'description' => 'Full brake inspection, pad replacement, and repairs.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-car-battery',     'title' => 'Battery Service',       'description' => 'Testing, replacement, and installation of batteries.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-laptop-medical',  'title' => 'Diagnostics',           'description' => 'Advanced diagnostic tools to accurately identify any issues.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-clipboard-check', 'title' => 'Pre-purchase',          'description' => 'A full inspection to help you make a confident decision.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-oil-can',         'title' => 'Oil Change',            'description' => 'Fast and professional oil & filter changes.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-calendar-check',  'title' => 'Maintenance',           'description' => 'Routine factory-recommended services.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-tachometer-alt',  'title' => 'Suspension',            'description' => 'Repair and replacement of shocks and struts.', 'link' => '#appointment' ),
-                array( 'icon' => 'fa-bolt',            'title' => 'Electrical',            'description' => 'Basic electrical checks and minor fixes.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80', 'title' => 'General Auto Repair',  'description' => 'General diagnostics and repairs for all makes and models.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=600&q=80', 'title' => 'Tire Service',          'description' => 'Tire replacement, rotation, and balancing for a smooth drive.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=600&q=80', 'title' => 'AC & Heating',          'description' => 'Inspection and repair of air conditioning and heating systems.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80', 'title' => 'Wheel Alignment',       'description' => 'Precision wheel alignment to enhance driving stability.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=600&q=80', 'title' => 'Brake Services',        'description' => 'Full brake inspection, pad replacement, and repairs.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1552930294-6b595f4c2974?auto=format&fit=crop&w=600&q=80', 'title' => 'Battery Service',       'description' => 'Testing, replacement, and installation of batteries.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=600&q=80', 'title' => 'Diagnostics',           'description' => 'Advanced diagnostic tools to accurately identify any issues.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80', 'title' => 'Pre-purchase',          'description' => 'A full inspection to help you make a confident decision.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=600&q=80', 'title' => 'Oil Change',            'description' => 'Fast and professional oil & filter changes.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80', 'title' => 'Maintenance',           'description' => 'Routine factory-recommended services.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1552930294-6b595f4c2974?auto=format&fit=crop&w=600&q=80', 'title' => 'Suspension',            'description' => 'Repair and replacement of shocks and struts.', 'link' => '#appointment' ),
+                array( 'image' => 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=600&q=80', 'title' => 'Electrical',            'description' => 'Basic electrical checks and minor fixes.', 'link' => '#appointment' ),
             );
         }
 
         foreach ( $services as $service ) :
+            $img_url = isset( $service['image'] ) ? $service['image'] : '';
         ?>
         <div class="service-card">
-            <div class="service-card-arrow">
-                <i class="fas fa-arrow-right"></i>
+            <?php if ( $img_url ) : ?>
+            <div class="service-card-image">
+                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy">
+                <div class="service-card-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </div>
-            <i class="fas <?php echo esc_attr( $service['icon'] ); ?> service-card-icon"></i>
+            <?php endif; ?>
             <h3><?php echo esc_html( $service['title'] ); ?></h3>
             <p><?php echo esc_html( $service['description'] ); ?></p>
             <a href="<?php echo esc_url( $service['link'] ); ?>" class="service-card-link">Learn More</a>
