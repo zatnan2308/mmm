@@ -53,11 +53,19 @@ function mmm_enqueue_assets() {
         '6.4.0'
     );
 
-    // Theme stylesheet
+    // Above-fold CSS (nav + hero) — render-blocking, ~5 KiB gzip
+    wp_enqueue_style(
+        'mmm-above-fold',
+        MMM_THEME_URI . '/assets/css/above-fold.css',
+        array(),
+        MMM_THEME_VERSION
+    );
+
+    // Theme stylesheet — deferred via mmm_defer_fontawesome filter
     wp_enqueue_style(
         'mmm-style',
         get_stylesheet_uri(),
-        array( 'mmm-google-fonts' ),
+        array( 'mmm-above-fold' ),
         MMM_THEME_VERSION
     );
 
@@ -89,9 +97,9 @@ function mmm_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'mmm_enqueue_assets' );
 
-/* ── Defer Font Awesome (non-render-blocking) ── */
+/* ── Defer non-critical CSS (non-render-blocking) ── */
 function mmm_defer_fontawesome( $tag, $handle ) {
-    // Defer main stylesheet (critical CSS is inlined)
+    // Defer main style.css (above-fold.css covers initial paint)
     if ( 'mmm-style' === $handle ) {
         $tag = str_replace(
             "rel='stylesheet'",
@@ -138,6 +146,19 @@ function mmm_font_overrides() {
         '</style>' . "\n";
 }
 add_action( 'wp_head', 'mmm_font_overrides', 5 );
+
+/* ── Add defer to all scripts ─────────────── */
+function mmm_defer_scripts( $tag, $handle, $src ) {
+    if ( is_admin() ) return $tag;
+    // Don't defer jQuery core
+    if ( 'jquery-core' === $handle || 'jquery' === $handle ) return $tag;
+    // Add defer if not already present
+    if ( strpos( $tag, 'defer' ) === false && strpos( $tag, 'async' ) === false ) {
+        $tag = str_replace( ' src=', ' defer src=', $tag );
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'mmm_defer_scripts', 10, 3 );
 
 /* ── Remove jQuery migrate on frontend ─────── */
 function mmm_remove_jquery_migrate( $scripts ) {
@@ -189,7 +210,9 @@ function mmm_dequeue_bloat() {
     wp_dequeue_style( 'classic-theme-styles' );
     wp_deregister_style( 'classic-theme-styles' );
 }
-add_action( 'wp_enqueue_scripts', 'mmm_dequeue_bloat', 100 );
+add_action( 'wp_enqueue_scripts', 'mmm_dequeue_bloat', 999 );
+add_action( 'wp_print_styles', 'mmm_dequeue_bloat', 999 );
+add_action( 'wp_print_scripts', 'mmm_dequeue_bloat', 999 );
 
 /* ── Disable WP emoji scripts ─────────────── */
 remove_action( 'wp_head', 'wp_generator' );
