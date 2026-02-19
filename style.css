@@ -1717,10 +1717,22 @@ button {
 
 .brands-slider {
     background: var(--color-black);
-    border-top: 1px solid rgba(255,255,255,0.05); /* border-y border-white/5 */
+    border-top: 1px solid rgba(255,255,255,0.05);
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 3rem 0; /* py-12 */
+    padding: 3rem 0;
     overflow: hidden;
+}
+
+.brands-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: var(--color-white);
+    text-align: center;
+    margin: 0 0 2.5rem;
+    padding: 0 1.5rem;
 }
 
 .brands-track {
@@ -1741,15 +1753,33 @@ button {
     /* animate-infinite-scroll = 40s linear infinite */
 }
 
-.brands-inner i {
-    font-size: 3rem; /* text-5xl */
-    color: var(--color-gray-800); /* text-gray-800 */
-    cursor: pointer;
-    transition: color 0.5s; /* transition-colors duration-500 */
+.brand-logo-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.brands-inner i:hover {
-    color: var(--color-white); /* hover:text-white */
+.brand-logo-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    opacity: 0.3;
+    filter: grayscale(100%) brightness(2);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.brand-logo-item img:hover {
+    opacity: 0.9;
+    filter: grayscale(0) brightness(1);
+}
+
+/* Trustindex widget wrapper */
+.trustindex-wrap {
+    max-width: 80rem;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
 }
 
 @keyframes infiniteScroll {

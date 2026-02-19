@@ -205,8 +205,12 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
 </section>
 
 <!-- ═══════════════════════════════════════════
-     TESTIMONIALS
+     TESTIMONIALS (Trustindex Widget)
      ═══════════════════════════════════════════ -->
+<?php
+$reviews_shortcode = mmm_acf( 'testimonials_shortcode', '' );
+if ( $reviews_shortcode ) :
+?>
 <section class="testimonials-section reveal">
     <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem;">
         <div class="testimonials-label">
@@ -215,85 +219,53 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
             <div class="line"></div>
         </div>
     </div>
-
-    <div class="testimonials-carousel scrollbar-hide">
-        <?php
-        $testimonials = null;
-        if ( function_exists( 'get_field' ) ) {
-            $testimonials = get_field( 'testimonials' );
-        }
-        if ( ! $testimonials ) {
-            $testimonials = array(
-                array(
-                    'initial' => 'K',
-                    'name'    => 'Kristian Lamb-Griffith',
-                    'date'    => '2025-09-20',
-                    'text'    => 'LOVE MMM Automotive! They are honest, fair, and most of all KNOWLEDGEABLE! It\'s refreshing and appreciated to have a trustworthy place to take my vehicle! Cannot recommend them enough!!!!',
-                ),
-                array(
-                    'initial' => 'M',
-                    'name'    => 'Michael S.',
-                    'date'    => '2025-10-02',
-                    'text'    => 'Excellent service on my BMW. They diagnosed the issue quickly where other shops failed. The transparency in pricing and timeline was fantastic. Will definitely return.',
-                ),
-                array(
-                    'initial' => 'S',
-                    'name'    => 'Sarah Jenkins',
-                    'date'    => '2025-08-15',
-                    'text'    => 'Professional, clean shop, and great communication. Brought my Audi in for routine maintenance and felt like I was getting dealership quality without the dealership price.',
-                ),
-            );
-        }
-
-        foreach ( $testimonials as $t ) :
-        ?>
-        <div class="testimonial-card">
-            <div class="testimonial-header">
-                <div class="testimonial-avatar"><?php echo esc_html( $t['initial'] ); ?></div>
-                <div>
-                    <p class="testimonial-name"><?php echo esc_html( $t['name'] ); ?></p>
-                    <p class="testimonial-date"><?php echo esc_html( $t['date'] ); ?></p>
-                </div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="testimonial-google" alt="Google" width="20" height="20" loading="lazy">
-            </div>
-            <div class="testimonial-stars">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="testimonial-text">"<?php echo esc_html( $t['text'] ); ?>"</p>
-        </div>
-        <?php endforeach; ?>
-    </div>
-
-    <div class="testimonials-dots">
-        <?php foreach ( $testimonials as $i => $t ) : ?>
-        <span></span>
-        <?php endforeach; ?>
+    <div class="trustindex-wrap">
+        <?php echo do_shortcode( $reviews_shortcode ); ?>
     </div>
 </section>
+<?php else : ?>
+<section class="testimonials-section reveal">
+    <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="testimonials-label">
+            <div class="line"></div>
+            <h3>Testimonials</h3>
+            <div class="line"></div>
+        </div>
+        <p style="text-align: center; color: var(--color-gray-500); padding: 3rem 0;">Configure Google Reviews in Page Settings → Testimonials tab.</p>
+    </div>
+</section>
+<?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
      BRANDS SLIDER
      ═══════════════════════════════════════════ -->
+<?php
+$brands_logos = null;
+if ( function_exists( 'get_field' ) ) {
+    $brands_logos = get_field( 'brands_logos' );
+}
+if ( $brands_logos && count( $brands_logos ) >= 1 ) :
+$brands_title = mmm_acf( 'brands_title', 'BRANDS WE SERVICE.' );
+?>
 <div class="brands-slider">
+    <h2 class="brands-title"><?php echo esc_html( $brands_title ); ?></h2>
     <div class="brands-track">
         <div class="brands-inner">
-            <i class="fab fa-aws"></i>
-            <i class="fab fa-google"></i>
-            <i class="fab fa-apple"></i>
-            <i class="fab fa-microsoft"></i>
-            <i class="fab fa-uber"></i>
-            <i class="fab fa-lyft"></i>
-            <i class="fab fa-bmw"></i>
-            <i class="fab fa-aws"></i>
-            <i class="fab fa-google"></i>
-            <i class="fab fa-apple"></i>
-            <i class="fab fa-microsoft"></i>
-            <i class="fab fa-uber"></i>
-            <i class="fab fa-lyft"></i>
-            <i class="fab fa-bmw"></i>
+            <?php foreach ( $brands_logos as $logo ) : ?>
+            <div class="brand-logo-item">
+                <img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo esc_attr( $logo['alt'] ?: $logo['title'] ); ?>" loading="lazy">
+            </div>
+            <?php endforeach; ?>
+            <?php /* Duplicate for infinite scroll */ ?>
+            <?php foreach ( $brands_logos as $logo ) : ?>
+            <div class="brand-logo-item">
+                <img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo esc_attr( $logo['alt'] ?: $logo['title'] ); ?>" loading="lazy">
+            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
      BOOKING FORM
