@@ -1,0 +1,55 @@
+/* Critical CSS — inlined in <head> for instant FCP/LCP */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--color-black:#050505;--color-dark:#0A0A0A;--color-white:#FFFFFF;--color-gray-300:#D1D5DB;--color-gray-400:#9CA3AF;--color-gray-500:#6B7280;--color-gray-600:#4B5563;--color-gray-700:#374151;--color-gray-800:#1F2937;--color-gray-900:#111827}
+html{scroll-behavior:smooth}
+body{background-color:var(--color-black);color:var(--color-white);overflow-x:hidden;font-family:'Space Grotesk','Space Grotesk Fallback',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+ul,ol{list-style:none}
+button{font-family:inherit}
+.glass-panel{background:rgba(5,5,5,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.05)}
+.site-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:all .3s ease}
+.nav-inner{max-width:80rem;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:6rem;position:relative}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;position:relative;z-index:50}
+.nav-logo-custom{display:flex;align-items:center}
+.nav-logo-img{height:3rem;width:auto;max-width:200px;object-fit:contain}
+.nav-logo-icon{width:2.5rem;height:2.5rem;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;background:var(--color-white);color:var(--color-black);font-family:'Syne',sans-serif;font-weight:700;font-size:1.25rem}
+.nav-logo-text{display:flex;flex-direction:column}
+.nav-logo-text .brand{font-family:'Syne',sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:-0.05em;line-height:1;color:var(--color-white)}
+.nav-logo-text .sub{font-size:10px;letter-spacing:.3em;color:var(--color-gray-500);text-transform:uppercase;line-height:1;margin-top:.25rem}
+.nav-menu{display:none;align-items:center;gap:3rem}
+.nav-menu a,.nav-menu li a{font-size:.75rem;font-weight:700;color:var(--color-gray-400);text-decoration:none;text-transform:uppercase;letter-spacing:.2em;transition:color .3s}
+.nav-actions{display:none;align-items:center;gap:2rem}
+.nav-phone{font-size:.75rem;font-weight:500;color:var(--color-white);letter-spacing:.05em;text-decoration:none}
+.nav-cta{position:relative;padding:.75rem 2rem;background:var(--color-white);color:var(--color-black);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;overflow:hidden;display:inline-block}
+.mobile-menu-btn{display:block;background:none;border:none;color:var(--color-white);font-size:1.5rem;cursor:pointer;position:relative;z-index:50;padding:0;line-height:1}
+@media(min-width:768px){.nav-menu{display:flex}.nav-actions{display:flex}.mobile-menu-btn{display:none}.nav-inner{padding:0 2rem}}
+.hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:6rem;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,#050505,rgba(5,5,5,0.8),transparent);z-index:1}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#050505,transparent,transparent);z-index:1}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.5;filter:grayscale(100%);transform:scale(1.05)}
+.hero-content{position:relative;z-index:20;max-width:80rem;margin:0 auto;padding:0 1.5rem;width:100%}
+.hero-inner{max-width:56rem}
+.hero-badge{display:inline-block;margin-bottom:2rem;padding:.5rem 1rem;border:1px solid rgba(255,255,255,0.1);border-radius:9999px;background:rgba(255,255,255,0.05);backdrop-filter:blur(4px)}
+.hero-badge span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:var(--color-gray-300)}
+.hero-title{font-family:'Syne',sans-serif;font-size:3rem;font-weight:700;line-height:1;letter-spacing:-0.05em;margin-bottom:2rem;color:var(--color-white)}
+.hero-title .gradient-text{background:linear-gradient(to right,var(--color-gray-400),var(--color-gray-700));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:1.125rem;color:var(--color-gray-400);font-weight:300;max-width:36rem;margin-bottom:3rem;border-left:1px solid rgba(255,255,255,0.2);padding-left:1.5rem;line-height:1.625}
+.hero-buttons{display:flex;flex-direction:column;gap:1.5rem}
+.hero-btn-primary{position:relative;padding:1.25rem 2.5rem;background:var(--color-white);color:var(--color-black);font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;overflow:hidden;display:inline-block;text-align:center}
+.hero-btn-primary .btn-bg{position:absolute;inset:0;background:var(--color-gray-900);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.hero-btn-primary span{position:relative;z-index:1;transition:color .3s}
+.hero-btn-secondary{padding:1.25rem 2.5rem;border:1px solid rgba(255,255,255,0.2);color:var(--color-white);font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;display:inline-block;text-align:center}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+.animate-fade-in-up{animation:fadeInUp .8s ease-out forwards}
+@media(min-width:640px){.hero-buttons{flex-direction:row}}
+@media(min-width:768px){.hero-title{font-size:4.5rem}.hero-subtitle{font-size:1.25rem}}
+@media(min-width:1024px){.hero-title{font-size:6rem}.hero-content{padding:0 2rem}}
+.svc-hero{position:relative;height:80vh;display:flex;align-items:center;padding-top:6rem;overflow:hidden}
+.svc-hero .hero-bg img{animation:none;opacity:.6}
+.svc-hero .hero-title{font-size:2.25rem;line-height:1.1}
+@media(min-width:768px){.svc-hero .hero-title{font-size:3.75rem}}
+.mega-menu-parent{position:static!important;height:100%;display:flex;align-items:center}
+.mega-trigger{display:flex;align-items:center;gap:.375rem}
+.mega-chevron{font-size:.5rem;opacity:.5;transition:transform .3s}

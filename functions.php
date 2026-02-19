@@ -91,6 +91,24 @@ add_action( 'wp_enqueue_scripts', 'mmm_enqueue_assets' );
 
 /* ── Defer Font Awesome (non-render-blocking) ── */
 function mmm_defer_fontawesome( $tag, $handle ) {
+    // Defer main stylesheet (critical CSS is inlined)
+    if ( 'mmm-style' === $handle ) {
+        $tag = str_replace(
+            "rel='stylesheet'",
+            "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"",
+            $tag
+        );
+        return $tag . '<noscript>' . str_replace( "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"", "rel='stylesheet'", $tag ) . '</noscript>';
+    }
+    // Defer Contact Form 7 CSS
+    if ( 'contact-form-7' === $handle ) {
+        $tag = str_replace(
+            "rel='stylesheet'",
+            "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"",
+            $tag
+        );
+        return $tag . '<noscript>' . str_replace( "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"", "rel='stylesheet'", $tag ) . '</noscript>';
+    }
     if ( 'mmm-font-awesome' === $handle ) {
         // Load as preload + onload swap — removes render-blocking
         $tag = str_replace(
@@ -110,11 +128,16 @@ function mmm_defer_fontawesome( $tag, $handle ) {
 }
 add_filter( 'style_loader_tag', 'mmm_defer_fontawesome', 10, 2 );
 
-/* ── Add font-display:swap to FontAwesome fonts ── */
-function mmm_fa_font_display_swap() {
-    echo '<style>@font-face{font-family:"Font Awesome 6 Free";font-display:swap;}@font-face{font-family:"Font Awesome 6 Brands";font-display:swap;}</style>' . "\n";
+/* ── Add font-display:swap + font fallback overrides ── */
+function mmm_font_overrides() {
+    echo '<style>' .
+        '@font-face{font-family:"Font Awesome 6 Free";font-display:swap;}' .
+        '@font-face{font-family:"Font Awesome 6 Brands";font-display:swap;}' .
+        '@font-face{font-family:"Space Grotesk Fallback";src:local("Arial");size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%;}' .
+        '@font-face{font-family:"Syne Fallback";src:local("Arial Black");size-adjust:95%;ascent-override:100%;descent-override:22%;line-gap-override:0%;}' .
+        '</style>' . "\n";
 }
-add_action( 'wp_head', 'mmm_fa_font_display_swap', 5 );
+add_action( 'wp_head', 'mmm_font_overrides', 5 );
 
 /* ── Remove jQuery migrate on frontend ─────── */
 function mmm_remove_jquery_migrate( $scripts ) {
@@ -146,40 +169,27 @@ function mmm_defer_google_fonts( $tag, $handle ) {
 }
 add_filter( 'style_loader_tag', 'mmm_defer_google_fonts', 10, 2 );
 
-/* ── Dequeue Jetpack bloat CSS on frontend ──── */
-function mmm_dequeue_jetpack_css() {
-    // Jetpack subscription/newsletter block CSS
-    wp_dequeue_style( 'jetpack-subscriptions' );
-    wp_deregister_style( 'jetpack-subscriptions' );
+/* ── Dequeue bloat CSS/JS on frontend ──────── */
+function mmm_dequeue_bloat() {
+    // Hostinger Reach subscription block
+    wp_dequeue_style( 'hostinger-reach-subscription-block' );
+    wp_deregister_style( 'hostinger-reach-subscription-block' );
+    wp_dequeue_script( 'hostinger-reach-subscription-block-view' );
+    wp_deregister_script( 'hostinger-reach-subscription-block-view' );
 
-    // Jetpack global styles
-    wp_dequeue_style( 'jetpack-global-styles-frontend-style' );
-    wp_deregister_style( 'jetpack-global-styles-frontend-style' );
-
-    // WP Block Library (if not using Gutenberg on frontend)
+    // WP Block Library (not using Gutenberg on frontend)
     wp_dequeue_style( 'wp-block-library' );
     wp_deregister_style( 'wp-block-library' );
-
-    // WP Block Library Theme
     wp_dequeue_style( 'wp-block-library-theme' );
     wp_deregister_style( 'wp-block-library-theme' );
 
-    // Global styles (WP 5.9+ FSE)
+    // Global styles / Classic theme styles
     wp_dequeue_style( 'global-styles' );
     wp_deregister_style( 'global-styles' );
-
-    // Classic theme styles
     wp_dequeue_style( 'classic-theme-styles' );
     wp_deregister_style( 'classic-theme-styles' );
 }
-add_action( 'wp_enqueue_scripts', 'mmm_dequeue_jetpack_css', 100 );
-
-/* ── Remove WP block scripts on frontend ────── */
-function mmm_remove_block_scripts() {
-    // Remove Gutenberg block scripts if not needed
-    wp_dequeue_script( 'wp-block-library' );
-}
-add_action( 'wp_enqueue_scripts', 'mmm_remove_block_scripts', 100 );
+add_action( 'wp_enqueue_scripts', 'mmm_dequeue_bloat', 100 );
 
 /* ── Disable WP emoji scripts ─────────────── */
 remove_action( 'wp_head', 'wp_generator' );

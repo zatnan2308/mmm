@@ -15,6 +15,11 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
 
+    <!-- Critical CSS (above-the-fold) -->
+    <style>
+    <?php echo file_get_contents( get_template_directory() . '/assets/css/critical.css' ); ?>
+    </style>
+
     <!-- Preload hero LCP image -->
     <?php
     $is_front = ( is_front_page() || is_home() );
