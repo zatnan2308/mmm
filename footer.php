@@ -30,7 +30,7 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
                         $f_logo_id  = get_theme_mod( 'custom_logo' );
                         $f_logo_url = wp_get_attachment_image_url( $f_logo_id, 'full' );
                         ?>
-                        <img src="<?php echo esc_url( $f_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo-img">
+                        <img src="<?php echo esc_url( $f_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo-img" width="250" height="56">
                     </a>
                 <?php else : ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>">

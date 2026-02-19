@@ -502,7 +502,7 @@ foreach ( $svc['included'] as $item ) {
 <!-- ═══ SERVICE HERO ═══ -->
 <section class="svc-hero">
     <div class="hero-bg">
-        <img src="<?php echo esc_url( $svc['hero_img'] ); ?>" alt="<?php echo esc_attr( $svc['title'] ); ?>">
+        <img src="<?php echo esc_url( $svc['hero_img'] ); ?>" alt="<?php echo esc_attr( $svc['title'] ); ?>" width="1920" height="1080" fetchpriority="high">
     </div>
     <div class="hero-content">
         <div class="hero-inner">

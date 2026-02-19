@@ -8,6 +8,24 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+
+    <!-- Preload hero LCP image -->
+    <?php
+    $is_front = ( is_front_page() || is_home() );
+    if ( $is_front ) {
+        $lcp_img = mmm_get( 'mmm_hero_image', '' );
+        if ( $lcp_img ) {
+            echo '<link rel="preload" as="image" href="' . esc_url( $lcp_img ) . '">' . "\n";
+        }
+    }
+    ?>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'antialiased' ); ?>>
@@ -23,7 +41,7 @@
                 $logo_id  = get_theme_mod( 'custom_logo' );
                 $logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
                 ?>
-                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img">
+                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img" width="200" height="48">
             </a>
         <?php else : ?>
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
@@ -78,7 +96,7 @@
     <div class="mob-header">
         <?php if ( has_custom_logo() ) : ?>
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo nav-logo-custom">
-                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img">
+                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img" width="200" height="40">
             </a>
         <?php else : ?>
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mob-logo">

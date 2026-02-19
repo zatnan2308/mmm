@@ -45,7 +45,7 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
      ═══════════════════════════════════════════ -->
 <section id="home" class="hero-section">
     <div class="hero-bg">
-        <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php bloginfo( 'name' ); ?>">
+        <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="1920" height="1080" fetchpriority="high">
     </div>
 
     <div class="hero-content">
@@ -114,7 +114,7 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
     <div class="about-grid">
         <div class="about-image-wrap">
             <div class="about-image">
-                <img src="<?php echo esc_url( $about_img ); ?>" alt="About MMM Automotive">
+                <img src="<?php echo esc_url( $about_img ); ?>" alt="About MMM Automotive" width="800" height="900" loading="lazy">
             </div>
         </div>
         <div>
@@ -254,7 +254,7 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
                     <p class="testimonial-name"><?php echo esc_html( $t['name'] ); ?></p>
                     <p class="testimonial-date"><?php echo esc_html( $t['date'] ); ?></p>
                 </div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="testimonial-google" alt="Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="testimonial-google" alt="Google" width="20" height="20" loading="lazy">
             </div>
             <div class="testimonial-stars">
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
