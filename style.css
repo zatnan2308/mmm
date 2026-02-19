@@ -1719,26 +1719,30 @@ button {
     background: var(--color-black);
     border-top: 1px solid rgba(255,255,255,0.05);
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 3rem 0;
-    overflow: hidden;
+    padding: 4rem 1.5rem;
 }
 
 .brands-title {
     font-family: 'Syne', sans-serif;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
     color: var(--color-white);
-    text-align: center;
-    margin: 0 0 2.5rem;
+    line-height: 1;
+    max-width: 80rem;
+    margin: 0 auto 3rem;
     padding: 0 1.5rem;
 }
 
 .brands-track {
     position: relative;
     display: flex;
-    overflow: hidden; /* overflow-x-hidden */
+    overflow: hidden;
+    background: var(--color-white);
+    border-radius: 0.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2.5rem 0;
 }
 
 .brands-track:hover .brands-inner {
@@ -1764,6 +1768,12 @@ button {
     width: 150px;
     height: 150px;
     object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .brands-title {
+        font-size: 4.5rem;
+    }
 }
 
 /* Trustindex widget wrapper */
