@@ -2892,7 +2892,7 @@ button {
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: stretch;
 }
 
 .included-grid h2 {
@@ -2954,11 +2954,11 @@ button {
 }
 
 .included-image {
-    height: 500px;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.1);
     background: var(--color-black);
+    min-height: 300px;
 }
 
 .included-image img {
