@@ -12,6 +12,9 @@ define( 'MMM_THEME_VERSION', '1.0.0' );
 define( 'MMM_THEME_DIR', get_template_directory() );
 define( 'MMM_THEME_URI', get_template_directory_uri() );
 
+/* ── Mega Menu System ─────────────────────── */
+require_once MMM_THEME_DIR . '/inc/mega-menu.php';
+
 /* ── Theme Setup ──────────────────────────── */
 function mmm_theme_setup() {
     add_theme_support( 'title-tag' );

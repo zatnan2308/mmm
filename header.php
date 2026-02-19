@@ -43,7 +43,8 @@
                 'container'      => false,
                 'menu_class'     => 'nav-menu',
                 'fallback_cb'    => false,
-                'depth'          => 1,
+                'depth'          => 2,
+                'walker'         => new MMM_Mega_Walker(),
             ) );
             ?>
         <?php else : ?>

@@ -72,6 +72,43 @@
     window.addEventListener('scroll', reveal);
     reveal();
 
+    /* ── Mega Menu Hover ───────────────────── */
+    var megaParents = document.querySelectorAll('.mega-menu-parent');
+    megaParents.forEach(function (parent) {
+        var trigger = parent.querySelector('.mega-trigger');
+        var timer = null;
+
+        if (trigger) {
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                parent.classList.toggle('mega-open');
+            });
+        }
+
+        parent.addEventListener('mouseenter', function () {
+            clearTimeout(timer);
+            parent.classList.add('mega-open');
+        });
+
+        parent.addEventListener('mouseleave', function () {
+            timer = setTimeout(function () {
+                parent.classList.remove('mega-open');
+            }, 150);
+        });
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            megaParents.forEach(function (p) { p.classList.remove('mega-open'); });
+        }
+    });
+
+    document.addEventListener('click', function (e) {
+        megaParents.forEach(function (p) {
+            if (!p.contains(e.target)) p.classList.remove('mega-open');
+        });
+    });
+
     /* ── Nav background on scroll ────────────── */
     var siteNav = document.querySelector('.site-nav');
     if (siteNav) {
