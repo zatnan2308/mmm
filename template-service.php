@@ -786,7 +786,7 @@ if ( $svc_content ) : ?>
                     <span class="booking-label" style="margin-bottom: 1.5rem;">Service needed*</span>
                     <div class="service-checkboxes">
                         <?php
-                        $checkbox_services = array( 'Oil Change & Maintenance', 'Wheel Alignment', 'Brakes Service', 'AC & Heating', 'Diagnostics', 'Battery Service', 'Tires / Wheels', 'Suspension', 'Scheduled Maintenance', 'Pre-purchase Inspection', 'Electrical Repair', 'Other' );
+                        $checkbox_services = array( 'General Auto Repair', 'Oil Change & Maintenance', 'Wheel Alignment', 'Brakes Service', 'AC & Heating', 'Diagnostics', 'Battery Service', 'Tires / Wheels', 'Suspension', 'Scheduled Maintenance', 'Pre-purchase Inspection', 'Electrical Repair', 'Other' );
                         $precheck = isset( $svc['precheck'] ) ? $svc['precheck'] : '';
                         foreach ( $checkbox_services as $csvc ) :
                             $is_checked = ( $csvc === $precheck );

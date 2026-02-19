@@ -912,6 +912,7 @@ acf_add_local_field_group( array(
             'type'          => 'select',
             'choices'       => array(
                 ''                       => '— None —',
+                'General Auto Repair'    => 'General Auto Repair',
                 'Oil Change & Maintenance' => 'Oil Change & Maintenance',
                 'Wheel Alignment'        => 'Wheel Alignment',
                 'Brakes Service'         => 'Brakes Service',
