@@ -338,31 +338,50 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
             $gallery = get_field( 'gallery_images' );
         }
 
-        if ( $gallery ) :
-            foreach ( $gallery as $img ) :
-        ?>
-        <div class="gallery-item">
-            <img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( $img['alt'] ); ?>" loading="lazy">
-        </div>
-        <?php
-            endforeach;
-        else :
-            $fallback_gallery = array(
-                array( 'src' => 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=1974&auto=format&fit=crop', 'alt' => 'BMW on lift' ),
-                array( 'src' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=1974&auto=format&fit=crop', 'alt' => 'Car Parts and Oil' ),
-                array( 'src' => 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=2070&auto=format&fit=crop', 'alt' => 'Car on lift low angle' ),
-                array( 'src' => 'https://images.unsplash.com/photo-1552930294-6b595f4c2974?q=80&w=2071&auto=format&fit=crop', 'alt' => 'Engine bay open' ),
+        $gallery_items = array();
+        if ( $gallery ) {
+            foreach ( $gallery as $img ) {
+                $gallery_items[] = array(
+                    'src'  => $img['url'],
+                    'full' => isset( $img['sizes']['large'] ) ? $img['sizes']['large'] : $img['url'],
+                    'alt'  => $img['alt'],
+                );
+            }
+        } else {
+            $gallery_items = array(
+                array( 'src' => 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=600&auto=format&fit=crop', 'full' => 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=1974&auto=format&fit=crop', 'alt' => 'BMW on lift' ),
+                array( 'src' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=600&auto=format&fit=crop', 'full' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=1974&auto=format&fit=crop', 'alt' => 'Car Parts and Oil' ),
+                array( 'src' => 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=600&auto=format&fit=crop', 'full' => 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=2070&auto=format&fit=crop', 'alt' => 'Car on lift low angle' ),
+                array( 'src' => 'https://images.unsplash.com/photo-1552930294-6b595f4c2974?q=80&w=600&auto=format&fit=crop', 'full' => 'https://images.unsplash.com/photo-1552930294-6b595f4c2974?q=80&w=2071&auto=format&fit=crop', 'alt' => 'Engine bay open' ),
             );
-            foreach ( $fallback_gallery as $img ) :
+        }
+
+        foreach ( $gallery_items as $idx => $img ) :
         ?>
-        <div class="gallery-item">
+        <div class="gallery-item" data-lightbox="<?php echo $idx; ?>" data-full="<?php echo esc_url( $img['full'] ); ?>" data-alt="<?php echo esc_attr( $img['alt'] ); ?>">
             <img src="<?php echo esc_url( $img['src'] ); ?>" alt="<?php echo esc_attr( $img['alt'] ); ?>" loading="lazy">
+            <div class="gallery-item-zoom"><i class="fas fa-expand"></i></div>
         </div>
-        <?php
-            endforeach;
-        endif;
-        ?>
+        <?php endforeach; ?>
     </div>
 </section>
+
+<!-- Lightbox -->
+<div id="mmm-lightbox" class="lb" aria-hidden="true" role="dialog" aria-label="Image gallery">
+    <div class="lb-overlay"></div>
+    <div class="lb-wrap">
+        <div class="lb-topbar">
+            <span class="lb-counter"></span>
+            <button class="lb-close" aria-label="Close gallery"><i class="fas fa-times"></i></button>
+        </div>
+        <button class="lb-arrow lb-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <button class="lb-arrow lb-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        <div class="lb-stage">
+            <img class="lb-img" src="" alt="" draggable="false">
+            <div class="lb-spinner"><div></div></div>
+        </div>
+        <p class="lb-caption"></p>
+    </div>
+</div>
 
 <?php get_footer(); ?>
