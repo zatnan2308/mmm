@@ -126,8 +126,7 @@ function mmm_handle_booking() {
         wp_send_json_error( array( 'message' => 'Something went wrong. Please call us directly.' ) );
     }
 }
-add_action( 'wp_ajax_mmm_booking', 'mmm_handle_booking' );
-add_action( 'wp_ajax_nopriv_mmm_booking', 'mmm_handle_booking' );
+/* Forms now handled by Contact Form 7 plugin */
 
 /* ── Custom Image Sizes ───────────────────── */
 function mmm_custom_image_sizes() {
@@ -331,5 +330,4 @@ function mmm_handle_contact() {
         wp_send_json_error( array( 'message' => 'Something went wrong. Please call us directly.' ) );
     }
 }
-add_action( 'wp_ajax_mmm_contact', 'mmm_handle_contact' );
-add_action( 'wp_ajax_nopriv_mmm_contact', 'mmm_handle_contact' );
+/* Contact form now handled by Contact Form 7 plugin */

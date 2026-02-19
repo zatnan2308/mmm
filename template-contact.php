@@ -118,34 +118,16 @@ $maps_link  = mmm_acf( 'contact_map_link', 'https://www.google.com/maps/place/25
             <!-- Right: Contact Form Card -->
             <div class="contact-form-card">
                 <h3 class="contact-form-title">Send a Message</h3>
-                <form id="mmm-contact-form" class="contact-form" novalidate>
-                    <?php wp_nonce_field( 'mmm_contact_nonce', 'mmm_contact_nonce_field' ); ?>
-
-                    <div class="form-row form-row-2">
-                        <div class="form-group">
-                            <input type="text" id="contact-name" name="contact_name" class="form-input" placeholder="Name" required>
-                            <label for="contact-name" class="form-label">Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="contact-email" name="contact_email" class="form-input" placeholder="Email" required>
-                            <label for="contact-email" class="form-label">Email</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" id="contact-subject" name="contact_subject" class="form-input" placeholder="Subject">
-                        <label for="contact-subject" class="form-label">Subject</label>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea id="contact-message" name="contact_message" rows="6" class="form-input form-textarea" placeholder="Message" required></textarea>
-                        <label for="contact-message" class="form-label">Message</label>
-                    </div>
-
-                    <button type="submit" class="contact-submit-btn">Send Message</button>
-
-                    <div id="contact-form-message" class="contact-form-msg" style="display: none;"></div>
-                </form>
+                <div class="cf7-form-wrap">
+                    <?php
+                    $contact_cf7 = mmm_acf( 'contact_cf7_shortcode', '' );
+                    if ( $contact_cf7 ) {
+                        echo do_shortcode( $contact_cf7 );
+                    } else {
+                        echo '<p style="color: var(--color-gray-500);">Configure the contact form in Page Settings → Contact Form tab.</p>';
+                    }
+                    ?>
+                </div>
             </div>
 
         </div>

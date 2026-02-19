@@ -3277,3 +3277,365 @@ button {
         font-size: 3rem;
     }
 }
+
+/* ========================================
+   CONTACT FORM 7 — DARK THEME STYLING
+   ======================================== */
+
+/* Reset CF7 defaults */
+.cf7-form-wrap .wpcf7 {
+    margin: 0;
+    padding: 0;
+}
+
+.cf7-form-wrap .wpcf7-form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Layout rows */
+.cf7-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .cf7-row-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .cf7-row-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Field wrapper */
+.cf7-field {
+    position: relative;
+    margin-bottom: 0;
+}
+
+/* Labels */
+.cf7-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+}
+
+/* Text inputs */
+.cf7-form-wrap .wpcf7-form-control.cf7-input,
+.cf7-form-wrap input.cf7-input,
+.cf7-form-wrap textarea.cf7-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-gray-800);
+    padding: 0.875rem 0;
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cf7-form-wrap .cf7-input:focus {
+    border-color: var(--color-white);
+}
+
+.cf7-form-wrap .cf7-input::placeholder {
+    color: var(--color-gray-600);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Textarea */
+.cf7-form-wrap textarea.cf7-textarea {
+    resize: none;
+    min-height: 10rem;
+    line-height: 1.625;
+    border: 1px solid var(--color-gray-800);
+    padding: 1rem;
+    margin-top: 0.25rem;
+}
+
+.cf7-form-wrap textarea.cf7-textarea:focus {
+    border-color: var(--color-white);
+}
+
+/* Section label */
+.cf7-section-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.25rem;
+}
+
+/* Checkboxes section */
+.cf7-checkboxes-section {
+    margin-bottom: 2rem;
+}
+
+.cf7-checkbox-grid .wpcf7-list-item {
+    display: block;
+    margin: 0;
+}
+
+.cf7-checkbox-grid .wpcf7-checkbox {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .cf7-checkbox-grid .wpcf7-checkbox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.cf7-checkbox-grid .wpcf7-list-item label {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.75rem;
+    color: var(--color-gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cf7-checkbox-grid .wpcf7-list-item label:hover {
+    border-color: rgba(255,255,255,0.25);
+    color: var(--color-white);
+}
+
+/* Custom checkbox appearance */
+.cf7-checkbox-grid .wpcf7-list-item input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid var(--color-gray-600);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    border-radius: 0;
+}
+
+.cf7-checkbox-grid .wpcf7-list-item input[type="checkbox"]:checked {
+    background: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.cf7-checkbox-grid .wpcf7-list-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-black);
+}
+
+.cf7-checkbox-grid .wpcf7-list-item input[type="checkbox"]:hover {
+    border-color: var(--color-white);
+}
+
+/* Consent / Acceptance */
+.cf7-consent {
+    margin-bottom: 2rem;
+}
+
+.cf7-consent .wpcf7-acceptance {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cf7-consent .wpcf7-acceptance input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid var(--color-gray-600);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    border-radius: 0;
+}
+
+.cf7-consent .wpcf7-acceptance input[type="checkbox"]:checked {
+    background: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.cf7-consent .wpcf7-acceptance input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-black);
+}
+
+.cf7-consent .wpcf7-list-item-label,
+.cf7-consent .wpcf7-acceptance .wpcf7-list-item-label {
+    font-size: 0.65rem;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cf7-consent a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.cf7-consent a:hover {
+    text-decoration: underline;
+}
+
+/* Submit button */
+.cf7-form-wrap .wpcf7-submit,
+.cf7-form-wrap input.cf7-submit {
+    width: 100%;
+    background: var(--color-white);
+    color: var(--color-black);
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 1.25rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cf7-form-wrap .wpcf7-submit:hover,
+.cf7-form-wrap input.cf7-submit:hover {
+    background: #e5e7eb;
+}
+
+.cf7-form-wrap .wpcf7-submit:active {
+    transform: scale(0.98);
+}
+
+/* Spinner */
+.cf7-form-wrap .wpcf7-spinner {
+    display: block;
+    margin: 1rem auto 0;
+}
+
+/* Validation errors */
+.cf7-form-wrap .wpcf7-not-valid-tip {
+    color: #ef4444;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.cf7-form-wrap .wpcf7-not-valid {
+    border-color: #ef4444 !important;
+}
+
+/* Response messages */
+.cf7-form-wrap .wpcf7-response-output {
+    margin: 1.5rem 0 0 !important;
+    padding: 1rem 1.5rem !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.cf7-form-wrap .wpcf7 form.sent .wpcf7-response-output {
+    border-color: #22c55e !important;
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+}
+
+.cf7-form-wrap .wpcf7 form.invalid .wpcf7-response-output,
+.cf7-form-wrap .wpcf7 form.unaccepted .wpcf7-response-output {
+    border-color: #ef4444 !important;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.cf7-form-wrap .wpcf7 form.failed .wpcf7-response-output {
+    border-color: #f59e0b !important;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.05);
+}
+
+/* Remove CF7 default p tags margin */
+.cf7-form-wrap .wpcf7-form p {
+    margin: 0;
+}
+
+/* Remove list item margin default */
+.cf7-form-wrap .wpcf7-list-item {
+    margin: 0;
+}
+
+/* Select dropdown (if used) */
+.cf7-form-wrap select.wpcf7-form-control {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-gray-800);
+    padding: 0.875rem 0;
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+.cf7-form-wrap select.wpcf7-form-control option {
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+/* Contact page form adjustments */
+.contact-form-card .cf7-form-wrap .wpcf7-submit {
+    width: auto;
+    padding: 1.25rem 3rem;
+}
+
+@media (max-width: 767px) {
+    .contact-form-card .cf7-form-wrap .wpcf7-submit {
+        width: 100%;
+    }
+}

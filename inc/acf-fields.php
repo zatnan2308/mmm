@@ -320,7 +320,7 @@ acf_add_local_field_group( array(
             ),
         ),
 
-        /* ── BOOKING TAB ───────────────────────── */
+        /* ── BOOKING FORM TAB ──────────────────── */
         array(
             'key'   => 'field_tab_booking',
             'label' => 'Booking',
@@ -342,22 +342,12 @@ acf_add_local_field_group( array(
             'default_value' => 'Our team is currently accepting new appointments. Please fill out the form for a quick response.',
         ),
         array(
-            'key'          => 'field_booking_services',
-            'label'        => 'Service Checkboxes',
-            'name'         => 'booking_services',
-            'type'         => 'repeater',
-            'min'          => 1,
-            'max'          => 16,
-            'layout'       => 'table',
-            'button_label' => 'Add Service Option',
-            'sub_fields'   => array(
-                array(
-                    'key'   => 'field_booking_service_name',
-                    'label' => 'Service Name',
-                    'name'  => 'service_name',
-                    'type'  => 'text',
-                ),
-            ),
+            'key'           => 'field_booking_cf7',
+            'label'         => 'Contact Form 7 Shortcode',
+            'name'          => 'booking_cf7_shortcode',
+            'type'          => 'text',
+            'instructions'  => 'Paste the CF7 shortcode, e.g. [contact-form-7 id="123" title="Booking"]',
+            'placeholder'   => '[contact-form-7 id="" title="Booking Form"]',
         ),
 
         /* ── GALLERY TAB ──────────────────────── */
@@ -599,6 +589,20 @@ acf_add_local_field_group( array(
             'type'          => 'textarea',
             'rows'          => 2,
             'default_value' => 'Have a question about your vehicle or need a quote? Visit our shop or send us a message. We are here to help.',
+        ),
+
+        array(
+            'key'   => 'field_contact_tab_form',
+            'label' => 'Contact Form',
+            'type'  => 'tab',
+        ),
+        array(
+            'key'           => 'field_contact_cf7',
+            'label'         => 'Contact Form 7 Shortcode',
+            'name'          => 'contact_cf7_shortcode',
+            'type'          => 'text',
+            'instructions'  => 'Paste the CF7 shortcode, e.g. [contact-form-7 id="456" title="Contact"]',
+            'placeholder'   => '[contact-form-7 id="" title="Contact Form"]',
         ),
 
         array(
