@@ -157,6 +157,23 @@ button {
     transition: all 0.3s;
 }
 
+/* Custom logo image */
+.nav-logo-custom {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo-img {
+    height: 3rem;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.mobile-menu-header .nav-logo-img {
+    height: 2.5rem;
+}
+
 .nav-logo:hover .nav-logo-icon {
     background: var(--color-black);
     color: var(--color-white);
@@ -1682,6 +1699,19 @@ button {
     display: inline-block;
     margin-bottom: 2.5rem; /* mb-10 */
     text-decoration: none;
+}
+
+.footer-logo-custom {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    text-decoration: none;
+}
+
+.footer-logo-img {
+    height: 3.5rem;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
 }
 
 .footer-brand .brand-mmm {

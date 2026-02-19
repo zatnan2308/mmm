@@ -24,9 +24,19 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
         <div class="footer-top">
             <!-- Brand & Address -->
             <div class="footer-brand" style="max-width: 24rem;">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <span class="brand-mmm">MMM</span><span class="brand-auto">.AUTO</span>
-                </a>
+                <?php if ( has_custom_logo() ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-custom">
+                        <?php
+                        $f_logo_id  = get_theme_mod( 'custom_logo' );
+                        $f_logo_url = wp_get_attachment_image_url( $f_logo_id, 'full' );
+                        ?>
+                        <img src="<?php echo esc_url( $f_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo-img">
+                    </a>
+                <?php else : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <span class="brand-mmm">MMM</span><span class="brand-auto">.AUTO</span>
+                    </a>
+                <?php endif; ?>
 
                 <div>
                     <h5 class="footer-location-label">Location</h5>

@@ -17,13 +17,23 @@
 <nav class="site-nav glass-panel">
     <div class="nav-inner">
         <!-- Logo -->
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
-            <div class="nav-logo-icon">M</div>
-            <div class="nav-logo-text">
-                <span class="brand">MMM</span>
-                <span class="sub">Automotive</span>
-            </div>
-        </a>
+        <?php if ( has_custom_logo() ) : ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo nav-logo-custom">
+                <?php
+                $logo_id  = get_theme_mod( 'custom_logo' );
+                $logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+                ?>
+                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img">
+            </a>
+        <?php else : ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
+                <div class="nav-logo-icon">M</div>
+                <div class="nav-logo-text">
+                    <span class="brand">MMM</span>
+                    <span class="sub">Automotive</span>
+                </div>
+            </a>
+        <?php endif; ?>
 
         <!-- Desktop Menu -->
         <?php if ( has_nav_menu( 'primary' ) ) : ?>
@@ -63,13 +73,19 @@
 <!-- Mobile Menu Overlay (outside nav for proper z-index) -->
 <div id="mobile-menu" class="mobile-menu-overlay">
     <div class="mobile-menu-header">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
-            <div class="nav-logo-icon">M</div>
-            <div class="nav-logo-text">
-                <span class="brand">MMM</span>
-                <span class="sub">Automotive</span>
-            </div>
-        </a>
+        <?php if ( has_custom_logo() ) : ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo nav-logo-custom">
+                <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img">
+            </a>
+        <?php else : ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
+                <div class="nav-logo-icon">M</div>
+                <div class="nav-logo-text">
+                    <span class="brand">MMM</span>
+                    <span class="sub">Automotive</span>
+                </div>
+            </a>
+        <?php endif; ?>
         <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
             <i class="fas fa-times"></i>
         </button>
