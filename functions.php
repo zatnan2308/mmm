@@ -126,7 +126,8 @@ function mmm_handle_booking() {
         wp_send_json_error( array( 'message' => 'Something went wrong. Please call us directly.' ) );
     }
 }
-/* Forms now handled by Contact Form 7 plugin */
+/* ── Contact Form 7 tweaks ────────────────── */
+add_filter( 'wpcf7_autop_or_not', '__return_false' );
 
 /* ── Custom Image Sizes ───────────────────── */
 function mmm_custom_image_sizes() {
