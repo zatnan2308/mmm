@@ -493,6 +493,91 @@ if ( ! $svc ) {
     $svc = reset( $services );
 }
 
+// ─── ACF Overrides (ACF wins if filled) ──────────────────
+if ( function_exists( 'get_field' ) ) {
+    // Hero
+    $acf_badge = get_field( 'svc_badge' );
+    if ( $acf_badge ) $svc['badge'] = $acf_badge;
+
+    $acf_title = get_field( 'svc_title' );
+    if ( $acf_title ) $svc['title'] = $acf_title;
+
+    $acf_subtitle = get_field( 'svc_subtitle' );
+    if ( $acf_subtitle ) $svc['subtitle'] = $acf_subtitle;
+
+    $acf_hero_img = get_field( 'svc_hero_image' );
+    if ( $acf_hero_img ) $svc['hero_img'] = $acf_hero_img;
+
+    // Symptoms
+    $acf_sym_title = get_field( 'svc_symptoms_title' );
+    if ( $acf_sym_title ) $svc['symptoms_title'] = $acf_sym_title;
+
+    $acf_sym_text = get_field( 'svc_symptoms_text' );
+    if ( $acf_sym_text ) $svc['symptoms_text'] = $acf_sym_text;
+
+    $acf_symptoms = get_field( 'svc_symptoms' );
+    if ( $acf_symptoms ) {
+        $svc['symptoms'] = array();
+        foreach ( $acf_symptoms as $s ) {
+            $svc['symptoms'][] = array(
+                'img'   => isset( $s['image'] ) ? $s['image'] : '',
+                'icon'  => isset( $s['icon'] ) ? $s['icon'] : 'fa-car',
+                'title' => isset( $s['title'] ) ? $s['title'] : '',
+                'desc'  => isset( $s['desc'] ) ? $s['desc'] : '',
+            );
+        }
+    }
+
+    // What's Included
+    $acf_inc_title = get_field( 'svc_included_title' );
+    if ( $acf_inc_title ) $svc['included_title'] = $acf_inc_title;
+
+    $acf_included = get_field( 'svc_included_items' );
+    if ( $acf_included ) {
+        $svc['included'] = array();
+        foreach ( $acf_included as $item ) {
+            $svc['included'][] = array(
+                'text' => isset( $item['text'] ) ? $item['text'] : '',
+                'img'  => isset( $item['image'] ) ? $item['image'] : '',
+            );
+        }
+    }
+
+    $acf_def_img = get_field( 'svc_included_default_img' );
+    if ( $acf_def_img ) $svc['included_default_img'] = $acf_def_img;
+
+    // Gallery
+    $acf_gallery = get_field( 'svc_gallery' );
+    if ( $acf_gallery ) {
+        $svc['gallery'] = array();
+        foreach ( $acf_gallery as $g ) {
+            $svc['gallery'][] = array(
+                'img'     => isset( $g['sizes']['large'] ) ? $g['sizes']['large'] : $g['url'],
+                'caption' => $g['alt'] ? $g['alt'] : $g['title'],
+            );
+        }
+    }
+
+    // CTA
+    $acf_cta_title = get_field( 'svc_cta_title' );
+    if ( $acf_cta_title ) $svc['cta_title'] = $acf_cta_title;
+
+    $acf_cta_sub = get_field( 'svc_cta_subtitle' );
+    if ( $acf_cta_sub ) $svc['cta_sub'] = $acf_cta_sub;
+
+    $acf_cta_bg = get_field( 'svc_cta_image' );
+    if ( $acf_cta_bg ) $svc['cta_bg'] = $acf_cta_bg;
+
+    // FAQ
+    $acf_faq = get_field( 'svc_faq' );
+    if ( $acf_faq ) $svc['faq'] = $acf_faq;
+
+    // Precheck
+    $acf_precheck = get_field( 'svc_precheck' );
+    if ( $acf_precheck ) $svc['precheck'] = $acf_precheck;
+}
+
+// Build images array for JS
 $included_images_json = array();
 foreach ( $svc['included'] as $item ) {
     $included_images_json[] = $item['img'];
@@ -578,7 +663,19 @@ foreach ( $svc['included'] as $item ) {
     </div>
 </section>
 
+<?php
+// Optional extra content block
+$svc_content = get_field( 'svc_content' );
+if ( $svc_content ) : ?>
+<section class="svc-extra-content reveal">
+    <div style="max-width: 80rem; margin: 0 auto; padding: 4rem 1.5rem;">
+        <?php echo $svc_content; ?>
+    </div>
+</section>
+<?php endif; ?>
+
 <!-- ═══ WORK GALLERY SLIDER ═══ -->
+<?php if ( ! empty( $svc['gallery'] ) ) : ?>
 <section class="work-gallery reveal">
     <div class="work-gallery-inner">
         <h2>Our Work Gallery</h2>
@@ -597,6 +694,7 @@ foreach ( $svc['included'] as $item ) {
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- ═══ BIG CTA ═══ -->
 <section class="big-cta reveal">
@@ -610,6 +708,7 @@ foreach ( $svc['included'] as $item ) {
 </section>
 
 <!-- ═══ FAQ ═══ -->
+<?php if ( ! empty( $svc['faq'] ) ) : ?>
 <section class="faq-section reveal">
     <div class="faq-inner">
         <div class="faq-header">
@@ -630,6 +729,7 @@ foreach ( $svc['included'] as $item ) {
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- ═══ BOOKING FORM ═══ -->
 <section id="appointment" class="booking-section reveal">
