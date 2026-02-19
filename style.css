@@ -2507,6 +2507,67 @@ button {
     line-height: 1.1;
 }
 
+/* Service Hero Description (WYSIWYG) */
+.svc-hero-description {
+    color: var(--color-gray-400);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    padding-left: 1.5rem;
+}
+
+.svc-hero-description p {
+    margin-bottom: 1rem;
+}
+
+.svc-hero-description p:last-child {
+    margin-bottom: 0;
+}
+
+.svc-hero-description a {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s;
+}
+
+.svc-hero-description a:hover {
+    color: var(--color-gray-300);
+}
+
+.svc-hero-description ul,
+.svc-hero-description ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+    list-style: disc;
+}
+
+.svc-hero-description ol {
+    list-style: decimal;
+}
+
+.svc-hero-description li {
+    margin-bottom: 0.5rem;
+    list-style: inherit;
+}
+
+.svc-hero-description strong,
+.svc-hero-description b {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.svc-hero-description h2,
+.svc-hero-description h3,
+.svc-hero-description h4 {
+    color: var(--color-white);
+    font-family: 'Syne', sans-serif;
+    margin-bottom: 0.75rem;
+}
+
 @media (min-width: 768px) {
     .svc-hero .hero-title {
         font-size: 3.75rem; /* md:text-6xl */

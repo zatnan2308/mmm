@@ -674,12 +674,38 @@ acf_add_local_field_group( array(
             'rows'          => 2,
         ),
         array(
+            'key'           => 'field_svc_hero_description',
+            'label'         => 'Hero Description',
+            'name'          => 'svc_hero_description',
+            'type'          => 'wysiwyg',
+            'tabs'          => 'all',
+            'toolbar'       => 'full',
+            'media_upload'  => 1,
+            'instructions'  => 'Additional description displayed in the hero section above the appointment button.',
+        ),
+        array(
             'key'           => 'field_svc_hero_image',
             'label'         => 'Hero Background Image',
             'name'          => 'svc_hero_image',
             'type'          => 'image',
             'return_format' => 'url',
             'preview_size'  => 'medium',
+        ),
+
+        array(
+            'key'   => 'field_svc_tab_content',
+            'label' => 'Content',
+            'type'  => 'tab',
+        ),
+        array(
+            'key'           => 'field_svc_content',
+            'label'         => 'Additional Description',
+            'name'          => 'svc_content',
+            'type'          => 'wysiwyg',
+            'tabs'          => 'all',
+            'toolbar'       => 'full',
+            'media_upload'  => 1,
+            'instructions'  => 'Additional content displayed below the hero section. Supports rich text, images, and formatting.',
         ),
 
         array(

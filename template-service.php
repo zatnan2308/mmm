@@ -513,7 +513,14 @@ foreach ( $svc['included'] as $item ) {
                 <?php echo esc_html( $svc['title'] ); ?><br>
                 <span class="gradient-text"><?php echo esc_html( $svc['subtitle'] ); ?></span>
             </h1>
-            <div class="hero-buttons animate-fade-in-up" style="animation-delay: 0.2s;">
+            <?php
+            $hero_desc = get_field( 'svc_hero_description' );
+            if ( $hero_desc ) : ?>
+            <div class="svc-hero-description animate-fade-in-up" style="animation-delay: 0.15s;">
+                <?php echo $hero_desc; ?>
+            </div>
+            <?php endif; ?>
+            <div class="hero-buttons animate-fade-in-up" style="animation-delay: 0.25s;">
                 <a href="#appointment" class="hero-btn-primary">
                     <div class="btn-bg"></div>
                     <span>Request an appointment</span>
