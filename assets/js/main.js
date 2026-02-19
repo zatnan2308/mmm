@@ -22,6 +22,11 @@
         if (mobileMenu) {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = '';
+            // Reset accordion on close
+            var openSubs = mobileMenu.querySelectorAll('.mob-has-sub.open');
+            openSubs.forEach(function (sub) {
+                sub.classList.remove('open');
+            });
         }
     }
 
@@ -33,12 +38,25 @@
         closeBtn.addEventListener('click', closeMenu);
     }
 
-    // Close on link click
+    // Close on regular link click (not accordion triggers)
     if (mobileMenu) {
         mobileMenu.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', closeMenu);
+            link.addEventListener('click', function () {
+                closeMenu();
+            });
         });
     }
+
+    /* ── Mobile Accordion (Services sub-menu) ── */
+    var accordionTriggers = document.querySelectorAll('.mob-accordion-trigger');
+    accordionTriggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+            var parent = trigger.closest('.mob-has-sub');
+            if (parent) {
+                parent.classList.toggle('open');
+            }
+        });
+    });
 
     /* ── Smooth Scroll for Anchor Links ──────── */
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -100,6 +118,7 @@
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             megaParents.forEach(function (p) { p.classList.remove('mega-open'); });
+            closeMenu();
         }
     });
 

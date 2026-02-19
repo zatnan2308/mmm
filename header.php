@@ -71,49 +71,132 @@
     </div>
 </nav>
 
-<!-- Mobile Menu Overlay (outside nav for proper z-index) -->
-<div id="mobile-menu" class="mobile-menu-overlay">
-    <div class="mobile-menu-header">
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="mob-overlay">
+
+    <!-- Header -->
+    <div class="mob-header">
         <?php if ( has_custom_logo() ) : ?>
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo nav-logo-custom">
                 <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="nav-logo-img">
             </a>
         <?php else : ?>
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
-                <div class="nav-logo-icon">M</div>
-                <div class="nav-logo-text">
-                    <span class="brand">MMM</span>
-                    <span class="sub">Automotive</span>
-                </div>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mob-logo">
+                <div class="mob-logo-icon">M</div>
+                <span class="mob-logo-text">MMM</span>
             </a>
         <?php endif; ?>
-        <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
+        <button id="mobile-menu-close" class="mob-close" aria-label="Close menu">
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <div class="mobile-menu-links">
-        <?php
-        // Use 'mobile' menu if set, otherwise fall back to 'primary'
-        $mobile_location = has_nav_menu( 'mobile' ) ? 'mobile' : 'primary';
-        if ( has_nav_menu( $mobile_location ) ) :
-            wp_nav_menu( array(
-                'theme_location' => $mobile_location,
-                'container'      => false,
-                'menu_class'     => 'mobile-nav-list',
-                'fallback_cb'    => false,
-                'depth'          => 1,
-            ) );
-        else : ?>
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-            <a href="<?php echo esc_url( home_url( '/#services' ) ); ?>">Services</a>
-            <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a>
-        <?php endif; ?>
+
+    <!-- Scrollable Content -->
+    <div class="mob-scroll">
+
+        <!-- Navigation -->
+        <nav class="mob-nav">
+            <?php
+            $mob_location = has_nav_menu( 'mobile' ) ? 'mobile' : 'primary';
+            $mob_menu_items = wp_get_nav_menu_items( get_nav_menu_locations()[ $mob_location ] ?? 0 );
+            $current_parent = 0;
+            $in_sub = false;
+
+            if ( $mob_menu_items ) :
+                foreach ( $mob_menu_items as $mitem ) :
+                    $is_mega  = get_post_meta( $mitem->ID, '_mmm_mega_parent', true );
+                    $icon     = get_post_meta( $mitem->ID, '_mmm_icon_class', true );
+                    $is_top   = get_post_meta( $mitem->ID, '_mmm_is_top', true );
+
+                    // Top-level item
+                    if ( intval( $mitem->menu_item_parent ) === 0 ) :
+
+                        // Close previous sub-menu if open
+                        if ( $in_sub ) {
+                            echo '</div></div>';
+                            $in_sub = false;
+                        }
+
+                        if ( $is_mega ) :
+                            $current_parent = $mitem->ID;
+                            ?>
+                            <div class="mob-item mob-has-sub" data-delay="0.2">
+                                <div class="mob-accordion-trigger">
+                                    <span class="mob-link-big"><?php echo esc_html( $mitem->title ); ?></span>
+                                    <i class="fas fa-chevron-down mob-chevron"></i>
+                                </div>
+                                <div class="mob-sub-menu">
+                            <?php
+                            $in_sub = true;
+                        else :
+                            ?>
+                            <div class="mob-item">
+                                <a href="<?php echo esc_url( $mitem->url ); ?>" class="mob-link-big mob-link-muted"><?php echo esc_html( $mitem->title ); ?></a>
+                            </div>
+                            <?php
+                        endif;
+
+                    // Sub-item (child of mega parent)
+                    elseif ( $in_sub && intval( $mitem->menu_item_parent ) == $current_parent ) :
+                        ?>
+                        <a href="<?php echo esc_url( $mitem->url ); ?>" class="mob-service-link<?php echo $is_top ? ' mob-service-popular' : ''; ?>">
+                            <?php if ( $icon ) : ?>
+                                <i class="<?php echo esc_attr( $icon ); ?> mob-service-icon<?php echo $is_top ? ' mob-icon-active' : ''; ?>"></i>
+                            <?php else : ?>
+                                <i class="fas fa-cog mob-service-icon"></i>
+                            <?php endif; ?>
+                            <div>
+                                <span class="mob-service-name"><?php echo esc_html( $mitem->title ); ?></span>
+                                <?php if ( $is_top ) : ?>
+                                    <span class="mob-popular-label">Popular Service</span>
+                                <?php endif; ?>
+                            </div>
+                        </a>
+                        <?php
+                    endif;
+                endforeach;
+
+                // Close last sub if open
+                if ( $in_sub ) {
+                    echo '</div></div>';
+                }
+            endif;
+            ?>
+        </nav>
+
+        <!-- Divider -->
+        <div class="mob-divider"></div>
+
+        <!-- Footer Info -->
+        <div class="mob-footer-info">
+            <div class="mob-info-block">
+                <p class="mob-info-label">Phone</p>
+                <a href="tel:<?php echo esc_attr( mmm_get( 'mmm_phone_link', '+17029549773' ) ); ?>" class="mob-info-value">
+                    <?php echo esc_html( mmm_get( 'mmm_phone', '(702) 954-9773' ) ); ?>
+                </a>
+            </div>
+            <div class="mob-info-block">
+                <p class="mob-info-label">Location</p>
+                <p class="mob-info-address">
+                    <?php echo nl2br( esc_html( mmm_get( 'mmm_address', "2585 S Maryland Pkwy, Suite D,\nLas Vegas, NV 89109" ) ) ); ?>
+                </p>
+            </div>
+            <div class="mob-socials">
+                <?php
+                $ig = mmm_get( 'mmm_instagram', '#' );
+                $fb = mmm_get( 'mmm_facebook', '#' );
+                $wa = mmm_get( 'mmm_whatsapp', '#' );
+                ?>
+                <a href="<?php echo esc_url( $ig ); ?>" class="mob-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="<?php echo esc_url( $fb ); ?>" class="mob-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?php echo esc_url( $wa ); ?>" class="mob-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
     </div>
-    <div class="mobile-menu-bottom">
-        <a href="<?php echo esc_url( home_url( '/#appointment' ) ); ?>" class="mobile-cta">Book Now</a>
-        <a href="tel:<?php echo esc_attr( mmm_get( 'mmm_phone_link', '+17029549773' ) ); ?>" class="mobile-phone">
-            <i class="fas fa-phone"></i> <?php echo esc_html( mmm_get( 'mmm_phone', '(702) 954-9773' ) ); ?>
-        </a>
+
+    <!-- Sticky Bottom CTA -->
+    <div class="mob-sticky-cta">
+        <a href="<?php echo esc_url( home_url( '/#appointment' ) ); ?>" class="mob-book-btn">Book Appointment</a>
     </div>
 </div>
