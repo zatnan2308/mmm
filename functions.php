@@ -25,7 +25,8 @@ function mmm_theme_setup() {
     ) );
 
     register_nav_menus( array(
-        'primary'       => __( 'Primary Menu', 'mmm-theme' ),
+        'primary'       => __( 'Desktop Menu', 'mmm-theme' ),
+        'mobile'        => __( 'Mobile Menu', 'mmm-theme' ),
         'footer-menu'   => __( 'Footer Menu', 'mmm-theme' ),
     ) );
 }

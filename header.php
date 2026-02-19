@@ -91,10 +91,23 @@
         </button>
     </div>
     <div class="mobile-menu-links">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-        <a href="<?php echo esc_url( home_url( '/#services' ) ); ?>">Services</a>
-        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a>
+        <?php
+        // Use 'mobile' menu if set, otherwise fall back to 'primary'
+        $mobile_location = has_nav_menu( 'mobile' ) ? 'mobile' : 'primary';
+        if ( has_nav_menu( $mobile_location ) ) :
+            wp_nav_menu( array(
+                'theme_location' => $mobile_location,
+                'container'      => false,
+                'menu_class'     => 'mobile-nav-list',
+                'fallback_cb'    => false,
+                'depth'          => 1,
+            ) );
+        else : ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+            <a href="<?php echo esc_url( home_url( '/#services' ) ); ?>">Services</a>
+            <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a>
+        <?php endif; ?>
     </div>
     <div class="mobile-menu-bottom">
         <a href="<?php echo esc_url( home_url( '/#appointment' ) ); ?>" class="mobile-cta">Book Now</a>
