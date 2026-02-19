@@ -212,27 +212,15 @@ $reviews_shortcode = mmm_acf( 'testimonials_shortcode', '' );
 if ( $reviews_shortcode ) :
 ?>
 <section class="testimonials-section reveal">
-    <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem;">
-        <div class="testimonials-label">
-            <div class="line"></div>
-            <h3>Testimonials</h3>
-            <div class="line"></div>
-        </div>
-    </div>
+    <h2 class="testimonials-title">TESTIMONIALS.</h2>
     <div class="trustindex-wrap">
         <?php echo do_shortcode( $reviews_shortcode ); ?>
     </div>
 </section>
 <?php else : ?>
 <section class="testimonials-section reveal">
-    <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem;">
-        <div class="testimonials-label">
-            <div class="line"></div>
-            <h3>Testimonials</h3>
-            <div class="line"></div>
-        </div>
-        <p style="text-align: center; color: var(--color-gray-500); padding: 3rem 0;">Configure Google Reviews in Page Settings → Testimonials tab.</p>
-    </div>
+    <h2 class="testimonials-title">TESTIMONIALS.</h2>
+    <p style="text-align: center; color: var(--color-gray-500); padding: 3rem 0;">Configure Google Reviews in Page Settings → Testimonials tab.</p>
 </section>
 <?php endif; ?>
 

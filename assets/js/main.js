@@ -140,6 +140,22 @@
         });
     }
 
+    /* ── Scroll to Top ────────────────────── */
+    var scrollTopBtn = document.getElementById('fab-scroll-top');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 600) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
     /* ── Lightbox ─────────────────────────────── */
     (function () {
         var lb = document.getElementById('mmm-lightbox');

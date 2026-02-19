@@ -1580,26 +1580,16 @@ button {
     overflow: hidden;
 }
 
-.testimonials-label {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* gap-4 */
-    margin-bottom: 3rem; /* mb-12 */
-    justify-content: center;
-}
-
-.testimonials-label .line {
-    height: 1px; /* h-px */
-    width: 2.5rem; /* w-10 */
-    background: var(--color-gray-800); /* bg-gray-800 */
-}
-
-.testimonials-label h3 {
+.testimonials-title {
     font-family: 'Syne', sans-serif;
-    color: var(--color-gray-500);
+    font-size: 3rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3em; /* tracking-[0.3em] */
-    font-size: 0.75rem; /* text-xs */
+    color: var(--color-white);
+    line-height: 1;
+    max-width: 80rem;
+    margin: 0 auto 3rem;
+    padding: 0 1.5rem;
 }
 
 .testimonials-carousel {
@@ -1771,7 +1761,8 @@ button {
 }
 
 @media (min-width: 768px) {
-    .brands-title {
+    .brands-title,
+    .testimonials-title {
         font-size: 4.5rem;
     }
 }
@@ -4676,5 +4667,121 @@ button {
 
     .lb-stage {
         max-width: calc(100vw - 12rem);
+    }
+}
+
+/* ========================================
+   FLOATING ACTION BUTTONS
+   ======================================== */
+
+/* WhatsApp */
+.fab-whatsapp {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 900;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #25D366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.fab-whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+.fab-whatsapp:active {
+    transform: scale(0.95);
+}
+
+/* Ping pulse */
+.fab-wa-ping {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25D366;
+    animation: fabPing 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    z-index: -1;
+}
+
+@keyframes fabPing {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    75%, 100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* Scroll to top */
+.fab-scroll-top {
+    position: fixed;
+    bottom: 6.5rem;
+    right: 2rem;
+    z-index: 900;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem);
+    transition: opacity 0.4s, visibility 0.4s, transform 0.4s, background 0.3s, border-color 0.3s;
+}
+
+.fab-scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.fab-scroll-top:hover {
+    background: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+.fab-scroll-top:active {
+    transform: scale(0.9);
+}
+
+.fab-scroll-top:focus {
+    outline: none;
+}
+
+@media (max-width: 767px) {
+    .fab-whatsapp {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+
+    .fab-scroll-top {
+        bottom: 5.25rem;
+        right: 1.25rem;
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }

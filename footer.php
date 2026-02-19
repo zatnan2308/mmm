@@ -108,6 +108,16 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
     </div>
 </footer>
 
+<!-- Floating Buttons -->
+<a href="https://wa.me/message/AGJR3QRL2I5TC1" class="fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="fab-wa-ping"></span>
+</a>
+
+<button class="fab-scroll-top" id="fab-scroll-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
 <?php wp_footer(); ?>
 </body>
 </html>
