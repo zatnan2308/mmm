@@ -255,6 +255,20 @@ function mmm_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'mmm_body_classes' );
 
+/* ── ACF Helper: get field with fallback ── */
+function mmm_acf( $field, $fallback = '' ) {
+    if ( function_exists( 'get_field' ) ) {
+        $val = get_field( $field );
+        if ( $val ) return $val;
+    }
+    return $fallback;
+}
+
+/* ── ACF Fields Registration ──────────────── */
+add_action( 'acf/init', function() {
+    require_once get_template_directory() . '/inc/acf-fields.php';
+} );
+
 /* ── Remove WordPress Emoji ───────────────── */
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );

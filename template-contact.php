@@ -7,7 +7,7 @@
 
 get_header();
 
-// Get contact info from Customizer
+// Contact info from Customizer
 $phone      = mmm_get( 'mmm_phone', '(702) 954-9773' );
 $phone_link = mmm_get( 'mmm_phone_link', '+17029549773' );
 $email      = mmm_get( 'mmm_email', 'info@mmmautomotive.com' );
@@ -17,9 +17,14 @@ $instagram = mmm_get( 'mmm_instagram', '#' );
 $facebook  = mmm_get( 'mmm_facebook', '#' );
 $whatsapp  = mmm_get( 'mmm_whatsapp', '#' );
 
-// Google Maps embed URL
-$maps_embed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.367174737274!2d-115.13909762423956!3d36.13328227244369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c49a60773d4b%3A0x6c6e7f8e8e8e8e8e!2s2585%20S%20Maryland%20Pkwy%20Suite%20D%2C%20Las%20Vegas%2C%20NV%2089109!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus';
-$maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+Las+Vegas,+NV+89109';
+// ACF with fallbacks
+$hero_badge    = mmm_acf( 'contact_hero_badge', 'Las Vegas, NV' );
+$hero_title1   = mmm_acf( 'contact_hero_title1', 'GET IN' );
+$hero_highlight = mmm_acf( 'contact_hero_highlight', 'TOUCH.' );
+$hero_subtitle = mmm_acf( 'contact_hero_subtitle', 'Have a question about your vehicle or need a quote? Visit our shop or send us a message. We are here to help.' );
+
+$maps_embed = mmm_acf( 'contact_map_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.367174737274!2d-115.13909762423956!3d36.13328227244369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c49a60773d4b%3A0x6c6e7f8e8e8e8e8e!2s2585%20S%20Maryland%20Pkwy%20Suite%20D%2C%20Las%20Vegas%2C%20NV%2089109!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus' );
+$maps_link  = mmm_acf( 'contact_map_link', 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+Las+Vegas,+NV+89109' );
 ?>
 
 <!-- ═══════════════════════════════════════════
@@ -30,18 +35,16 @@ $maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+L
         <div class="contact-hero-grid">
             <div>
                 <div class="hero-badge animate-fade-in-up">
-                    <span>Las Vegas, NV</span>
+                    <span><?php echo esc_html( $hero_badge ); ?></span>
                 </div>
 
                 <h1 class="contact-hero-title animate-fade-in-up" style="animation-delay: 0.1s;">
-                    GET IN<br>
-                    <span class="gradient-text">TOUCH.</span>
+                    <?php echo esc_html( $hero_title1 ); ?><br>
+                    <span class="gradient-text"><?php echo esc_html( $hero_highlight ); ?></span>
                 </h1>
             </div>
             <div class="contact-hero-subtitle-wrap animate-fade-in-up" style="animation-delay: 0.2s;">
-                <p class="hero-subtitle">
-                    Have a question about your vehicle or need a quote? Visit our shop or send us a message. We are here to help.
-                </p>
+                <p class="hero-subtitle"><?php echo esc_html( $hero_subtitle ); ?></p>
             </div>
         </div>
     </div>
@@ -57,7 +60,6 @@ $maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+L
             <!-- Left: Info Card -->
             <div class="contact-info-card">
                 <div>
-                    <!-- Address -->
                     <div class="contact-block">
                         <h3 class="contact-label">Visit Us</h3>
                         <address class="contact-address">
@@ -70,7 +72,6 @@ $maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+L
                         </div>
                     </div>
 
-                    <!-- Phone & Email -->
                     <div class="contact-block">
                         <div class="contact-detail">
                             <h3 class="contact-label">Call Us</h3>
@@ -82,7 +83,6 @@ $maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+L
                         </div>
                     </div>
 
-                    <!-- Hours -->
                     <div class="contact-block">
                         <h3 class="contact-label">Opening Hours</h3>
                         <ul class="contact-hours">
@@ -102,7 +102,6 @@ $maps_link  = 'https://www.google.com/maps/place/2585+S+Maryland+Pkwy+Suite+D,+L
                     </div>
                 </div>
 
-                <!-- Socials -->
                 <div class="contact-socials">
                     <a href="<?php echo esc_url( $instagram ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
