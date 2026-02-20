@@ -139,10 +139,10 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
 <!-- Cookie Consent Banner -->
 <div class="cookie-banner" id="cookie-banner">
     <div class="cookie-banner-inner">
-        <p class="cookie-banner-text">We use cookies to improve your experience and analyze site traffic. By continuing to browse, you agree to our use of cookies. <a href="/cookie-policy/">Cookie Policy</a></p>
+        <p class="cookie-banner-text">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept", you consent to our use of cookies. <a href="/cookie-policy/">Read Cookie Policy</a>.</p>
         <div class="cookie-banner-actions">
-            <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Decline</button>
-            <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept All</button>
+            <button class="cookie-btn cookie-btn-accept" id="cookie-accept">ACCEPT</button>
+            <button class="cookie-btn-close" id="cookie-decline" aria-label="Close">&times;</button>
         </div>
     </div>
 </div>

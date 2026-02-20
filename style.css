@@ -5410,9 +5410,11 @@ button {
     left: 0;
     right: 0;
     z-index: 9999;
-    background: var(--color-dark);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 1.25rem 1.5rem;
+    background: rgba(17, 17, 17, 0.97);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0;
     transform: translateY(100%);
     transition: transform 0.4s ease;
 }
@@ -5421,35 +5423,54 @@ button {
     transform: translateY(0);
 }
 
+/* Lift WhatsApp & scroll-top when banner is visible */
+body.cookie-banner-active .fab-whatsapp,
+body.cookie-banner-active .fab-scroll-top {
+    margin-bottom: 60px;
+}
+
+.fab-whatsapp,
+.fab-scroll-top {
+    transition: margin-bottom 0.4s ease, opacity 0.3s, background 0.3s;
+}
+
 .cookie-banner-inner {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    padding: 1rem 2.5rem;
 }
 
 .cookie-banner-text {
     font-size: 0.8125rem;
     color: var(--color-gray-400);
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
+    flex: 1;
 }
 
 .cookie-banner-text a {
     color: var(--color-white);
     text-decoration: underline;
+    font-weight: 600;
+}
+
+.cookie-banner-text a:hover {
+    color: var(--color-gray-300);
 }
 
 .cookie-banner-actions {
     display: flex;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0;
     flex-shrink: 0;
 }
 
 .cookie-btn {
-    padding: 0.625rem 1.5rem;
+    padding: 0.75rem 2rem;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 0.6875rem;
@@ -5457,26 +5478,35 @@ button {
     letter-spacing: 0.15em;
     cursor: pointer;
     transition: all 0.3s;
-    border: 1px solid;
+    border: none;
 }
 
 .cookie-btn-accept {
     background: var(--color-white);
     color: var(--color-black);
-    border-color: var(--color-white);
 }
 
 .cookie-btn-accept:hover {
     background: #e5e7eb;
 }
 
-.cookie-btn-decline {
+.cookie-btn-close {
     background: transparent;
-    color: var(--color-gray-400);
-    border-color: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--color-gray-500);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
 }
 
-.cookie-btn-decline:hover {
+.cookie-btn-close:hover {
     color: var(--color-white);
     border-color: rgba(255,255,255,0.3);
 }
@@ -5486,9 +5516,15 @@ button {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
+        padding: 1rem 1.25rem;
     }
 
     .cookie-banner-text {
         font-size: 0.75rem;
+    }
+
+    body.cookie-banner-active .fab-whatsapp,
+    body.cookie-banner-active .fab-scroll-top {
+        margin-bottom: 70px;
     }
 }

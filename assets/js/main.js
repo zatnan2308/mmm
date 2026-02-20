@@ -410,11 +410,15 @@
         /* Check if consent already given */
         var consent = localStorage.getItem('mmm_cookie_consent');
         if (!consent) {
-            setTimeout(function() { banner.classList.add('visible'); }, 1500);
+            setTimeout(function() {
+                banner.classList.add('visible');
+                document.body.classList.add('cookie-banner-active');
+            }, 1500);
         }
 
         function hideBanner() {
             banner.classList.remove('visible');
+            document.body.classList.remove('cookie-banner-active');
         }
 
         if (acceptBtn) {
