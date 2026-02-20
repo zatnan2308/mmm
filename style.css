@@ -2852,12 +2852,7 @@ button {
     display: block;
     width: 100%;
     height: 100%;
-    filter: grayscale(1) invert(1) contrast(1.1) brightness(0.5);
     transition: filter 0.4s;
-}
-
-.footer-map:hover iframe {
-    filter: none;
 }
 
 @media (min-width: 1024px) {
@@ -4082,24 +4077,6 @@ button {
     width: 100%;
     height: 100%;
     display: block;
-    filter: grayscale(100%) invert(90%) contrast(120%);
-    transition: filter 0.7s;
-}
-
-.contact-map-section:hover .contact-map-iframe {
-    filter: grayscale(0%) invert(0%) contrast(100%);
-}
-
-.contact-map-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.1);
-    pointer-events: none;
-    transition: background 0.5s;
-}
-
-.contact-map-section:hover .contact-map-overlay {
-    background: transparent;
 }
 
 .contact-map-label {
