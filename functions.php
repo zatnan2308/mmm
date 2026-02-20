@@ -471,3 +471,6 @@ function mmm_handle_contact() {
     }
 }
 /* Contact form now handled by Contact Form 7 plugin */
+
+/* Disable CF7 wpautop — prevents <p> wrapping that breaks step form HTML structure */
+add_filter( 'wpcf7_autop_or_not', '__return_false' );

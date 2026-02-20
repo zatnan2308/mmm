@@ -4528,7 +4528,7 @@ button {
     margin: 0;
 }
 
-/* Kill ALL default CF7 input styles */
+/* CF7 input styles — only OUTSIDE .form-step (contact page etc.) */
 .cf7-form-wrap .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-checkbox) {
     background: transparent !important;
     border: none !important;
@@ -4555,6 +4555,36 @@ button {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* OVERRIDE: inside .form-step our step-form styles win */
+.form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance) {
+    border: none !important;
+    border-bottom: 1px solid var(--color-gray-800) !important;
+    padding: 0.75rem 0 !important;
+}
+
+.form-step .wpcf7-form-control:not(.wpcf7-submit):focus {
+    border-bottom-color: var(--color-white) !important;
+}
+
+.form-step .wpcf7-form-control::placeholder {
+    color: var(--color-gray-700) !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    font-size: 0.875rem !important;
+}
+
+.form-step .form-label {
+    color: var(--color-white) !important;
+}
+
+.form-step .wpcf7-submit {
+    width: auto !important;
+    border: 1px solid var(--color-white) !important;
+    padding: 1.125rem 2.5rem !important;
+    font-size: 0.8125rem !important;
+    line-height: 1 !important;
 }
 
 /* Textarea overrides */

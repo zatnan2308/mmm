@@ -350,9 +350,9 @@
                         fields.forEach(function(f) {
                             if (!f.value || !f.value.trim()) {
                                 valid = false;
-                                f.style.borderBottomColor = '#ef4444';
+                                f.style.setProperty('border-bottom-color', '#ef4444', 'important');
                                 f.addEventListener('input', function handler() {
-                                    f.style.borderBottomColor = '';
+                                    f.style.removeProperty('border-bottom-color');
                                     f.removeEventListener('input', handler);
                                 });
                             }
