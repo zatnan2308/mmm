@@ -54,6 +54,20 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
                 </div>
             </div>
 
+            <!-- Map -->
+            <div class="footer-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6443.952955056719!2d-115.138439!3d36.142786!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c5a10c404dd9%3A0x997f5323bc372a30!2sMMM%20Automotive!5e0!3m2!1sen!2sus!4v1771619204392!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="MMM Automotive Location">
+                </iframe>
+            </div>
+
             <!-- Navigation & Hours -->
             <div class="footer-nav-wrap">
                 <div class="footer-nav">
