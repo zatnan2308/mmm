@@ -4557,8 +4557,35 @@ button {
     letter-spacing: 0.05em;
 }
 
-/* OVERRIDE: inside .form-step our step-form styles win */
-.form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance) {
+/* ═══════════════════════════════════════════
+   OVERRIDE: .form-step styles — MUST WIN
+   ═══════════════════════════════════════════ */
+
+/* Label: static above input, white, not absolute */
+.form-step .form-label,
+.form-step .form-group .form-label,
+.cf7-form-wrap .form-step .form-label {
+    position: static !important;
+    display: block !important;
+    left: auto !important;
+    top: auto !important;
+    font-size: 0.75rem !important;
+    color: var(--color-white) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 0.25rem !important;
+    pointer-events: auto !important;
+    transition: none !important;
+}
+
+/* .form-label-static (Service Required) */
+.form-step .form-label-static,
+.cf7-form-wrap .form-step .form-label-static {
+    color: var(--color-white) !important;
+}
+
+/* Inputs */
+.form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-select) {
     border: none !important;
     border-bottom: 1px solid var(--color-gray-800) !important;
     padding: 0.75rem 0 !important;
@@ -4569,22 +4596,58 @@ button {
 }
 
 .form-step .wpcf7-form-control::placeholder {
-    color: var(--color-gray-700) !important;
+    color: var(--color-gray-600) !important;
     text-transform: none !important;
     letter-spacing: normal !important;
     font-size: 0.875rem !important;
 }
 
-.form-step .form-label {
-    color: var(--color-white) !important;
+/* Select arrow */
+.form-step select.wpcf7-form-control,
+.form-step .wpcf7-form-control.wpcf7-select {
+    padding-right: 2rem !important;
 }
 
-.form-step .wpcf7-submit {
+/* Submit button — not full width, match Back size */
+.form-step .wpcf7-submit,
+.cf7-form-wrap .form-step .wpcf7-submit {
     width: auto !important;
     border: 1px solid var(--color-white) !important;
     padding: 1.125rem 2.5rem !important;
     font-size: 0.8125rem !important;
+    font-family: 'Syne', sans-serif !important;
     line-height: 1 !important;
+    letter-spacing: 0.15em !important;
+    box-sizing: border-box !important;
+    margin-top: 0 !important;
+}
+
+/* Consent row */
+.form-step .consent-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.form-step .consent-row .wpcf7-form-control-wrap {
+    display: inline-flex !important;
+    width: auto !important;
+    flex-shrink: 0 !important;
+}
+
+.form-step .consent-row .wpcf7-list-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    margin: 0 !important;
+}
+
+/* Step nav buttons row */
+.form-step .step-nav-split {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
 }
 
 /* Textarea overrides */
