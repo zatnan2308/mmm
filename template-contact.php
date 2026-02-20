@@ -53,7 +53,7 @@ $maps_link  = mmm_acf( 'contact_map_link', 'https://maps.app.goo.gl/cMp6fF1br7NC
 <!-- ═══════════════════════════════════════════
      CONTACT CARDS (INFO + FORM)
      ═══════════════════════════════════════════ -->
-<section class="contact-cards-section reveal">
+<section id="appointment" class="contact-cards-section reveal">
     <div class="contact-cards-inner">
         <div class="contact-cards-grid">
 

@@ -294,4 +294,18 @@
             touchDiffX = 0;
         }, { passive: true });
     })();
+
+    /* ── Smart Booking Button ───────────────── */
+    document.querySelectorAll('[data-booking]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            var target = document.getElementById('appointment');
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                e.preventDefault();
+                window.location.href = '/#appointment';
+            }
+        });
+    });
 })();
