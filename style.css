@@ -4529,7 +4529,7 @@ button {
 }
 
 /* CF7 input styles — only OUTSIDE .form-step (contact page etc.) */
-.cf7-form-wrap .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-checkbox) {
+.cf7-form-wrap .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-checkbox):not(.wpcf7-select) {
     background: transparent !important;
     border: none !important;
     border-bottom: 1px solid var(--color-gray-800) !important;
