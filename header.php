@@ -79,7 +79,7 @@
             <a href="tel:<?php echo esc_attr( mmm_get( 'mmm_phone_link', '+17029549773' ) ); ?>" class="nav-phone">
                 <?php echo esc_html( mmm_get( 'mmm_phone', '(702) 954-9773' ) ); ?>
             </a>
-            <a href="<?php echo esc_url( home_url( '/#appointment' ) ); ?>" class="nav-cta">Book Appointment</a>
+            <a href="#appointment" class="nav-cta">Book Appointment</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -215,6 +215,6 @@
 
     <!-- Sticky Bottom CTA -->
     <div class="mob-sticky-cta">
-        <a href="<?php echo esc_url( home_url( '/#appointment' ) ); ?>" class="mob-book-btn">Book Appointment</a>
+        <a href="#appointment" class="mob-book-btn">Book Appointment</a>
     </div>
 </div>
