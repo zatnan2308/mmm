@@ -4602,10 +4602,19 @@ button {
     font-size: 0.875rem !important;
 }
 
-/* Select arrow */
+/* Select arrow — must override cf7-form-wrap background:transparent */
+.form-step select,
 .form-step select.wpcf7-form-control,
-.form-step .wpcf7-form-control.wpcf7-select {
-    padding-right: 2rem !important;
+.form-step .wpcf7-form-control.wpcf7-select,
+.cf7-form-wrap .form-step select {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    padding-right: 2.5rem !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.5rem center !important;
+    background-size: 14px 14px !important;
 }
 
 /* Submit button — not full width, match Back size */
