@@ -4642,6 +4642,16 @@ button {
     margin: 0 !important;
 }
 
+/* Validation error text */
+.step-error {
+    display: block;
+    color: #ef4444;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.375rem;
+}
+
 /* Step nav buttons row */
 .form-step .step-nav-split {
     display: flex !important;

@@ -348,11 +348,29 @@
                             'input[aria-required="true"], .wpcf7-validates-as-required'
                         );
                         fields.forEach(function(f) {
+                            /* Remove old error if exists */
+                            var group = f.closest('.form-group');
+                            if (group) {
+                                var oldErr = group.querySelector('.step-error');
+                                if (oldErr) oldErr.remove();
+                            }
+
                             if (!f.value || !f.value.trim()) {
                                 valid = false;
                                 f.style.setProperty('border-bottom-color', '#ef4444', 'important');
+
+                                /* Add error message */
+                                if (group) {
+                                    var err = document.createElement('span');
+                                    err.className = 'step-error';
+                                    err.textContent = 'This field is required';
+                                    group.appendChild(err);
+                                }
+
                                 f.addEventListener('input', function handler() {
                                     f.style.removeProperty('border-bottom-color');
+                                    var g = f.closest('.form-group');
+                                    if (g) { var e = g.querySelector('.step-error'); if (e) e.remove(); }
                                     f.removeEventListener('input', handler);
                                 });
                             }
