@@ -298,10 +298,8 @@
     /* ── Two-Step Form Navigation ───────── */
     (function() {
         function initStepForms() {
-            /* Find forms inside .cf7-form-wrap OR .wpcf7-form */
-            var wraps = document.querySelectorAll('.cf7-form-wrap, .wpcf7');
-            wraps.forEach(function(wrap) {
-                if (wrap.dataset.stepsInit) return; /* already initialised */
+            document.querySelectorAll('.cf7-form-wrap').forEach(function(wrap) {
+                if (wrap.dataset.stepsInit) return;
                 var steps = wrap.querySelectorAll('.form-step');
                 if (steps.length < 2) return;
 
@@ -310,7 +308,10 @@
                 var line = wrap.querySelector('.step-line');
                 var current = 0;
 
-                /* Make sure first step is active */
+                /* Ensure only first step visible */
+                for (var i = 0; i < steps.length; i++) {
+                    steps[i].classList.remove('active');
+                }
                 steps[0].classList.add('active');
                 if (indicators[0]) indicators[0].classList.add('active');
 
@@ -318,28 +319,30 @@
                     steps[current].classList.remove('active');
                     steps[n].classList.add('active');
 
-                    indicators.forEach(function(ind, i) {
+                    indicators.forEach(function(ind, idx) {
                         ind.classList.remove('active', 'completed');
-                        if (i < n) ind.classList.add('completed');
-                        if (i === n) ind.classList.add('active');
+                        if (idx < n) ind.classList.add('completed');
+                        if (idx === n) ind.classList.add('active');
                     });
 
                     if (line) {
-                        if (n > 0) line.classList.add('filled');
-                        else line.classList.remove('filled');
+                        line.classList.toggle('filled', n > 0);
                     }
 
                     current = n;
-
-                    /* Scroll form into view */
                     var section = wrap.closest('.booking-section') || wrap;
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
 
-                /* Next button — validate step 1 fields */
-                wrap.querySelectorAll('.step-next-btn').forEach(function(btn) {
-                    btn.addEventListener('click', function(e) {
+                /* Use event delegation on the wrapper — survives CF7 DOM changes */
+                wrap.addEventListener('click', function(e) {
+                    var nextBtn = e.target.closest('.step-next-btn');
+                    var backBtn = e.target.closest('.step-back-btn');
+
+                    if (nextBtn) {
                         e.preventDefault();
+                        e.stopPropagation();
+                        /* Validate current step */
                         var valid = true;
                         var fields = steps[current].querySelectorAll(
                             'input[aria-required="true"], .wpcf7-validates-as-required'
@@ -347,35 +350,36 @@
                         fields.forEach(function(f) {
                             if (!f.value || !f.value.trim()) {
                                 valid = false;
-                                f.style.borderColor = '#ef4444';
+                                f.style.borderBottomColor = '#ef4444';
                                 f.addEventListener('input', function handler() {
-                                    f.style.borderColor = '';
+                                    f.style.borderBottomColor = '';
                                     f.removeEventListener('input', handler);
                                 });
                             }
                         });
                         if (valid && current < steps.length - 1) goTo(current + 1);
-                    });
-                });
+                        return;
+                    }
 
-                /* Back button */
-                wrap.querySelectorAll('.step-back-btn').forEach(function(btn) {
-                    btn.addEventListener('click', function(e) {
+                    if (backBtn) {
                         e.preventDefault();
+                        e.stopPropagation();
                         if (current > 0) goTo(current - 1);
-                    });
-                });
+                        return;
+                    }
+                }, true); /* capture phase — fires before CF7 */
             });
         }
 
-        /* Run immediately */
-        initStepForms();
-        /* Re-run after CF7 finishes rendering (it can be async) */
+        /* Run on DOM ready + delays for CF7 */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initStepForms);
+        } else {
+            initStepForms();
+        }
         setTimeout(initStepForms, 500);
         setTimeout(initStepForms, 1500);
-        /* Also listen for CF7 init event */
-        document.addEventListener('wpcf7mailsent', function() { initStepForms(); });
-        document.addEventListener('wpcf7invalid', function() { /* keep current step */ });
+        setTimeout(initStepForms, 3000);
     })();
 
     /* ── Smart Booking Button ───────────────── */

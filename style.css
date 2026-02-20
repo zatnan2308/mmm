@@ -2286,23 +2286,26 @@ button {
 
 .form-step .wpcf7-form-control.wpcf7-text,
 .form-step .wpcf7-form-control.wpcf7-tel,
-.form-step .wpcf7-form-control.wpcf7-email {
+.form-step .wpcf7-form-control.wpcf7-email,
+.cf7-form-wrap .form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance) {
     width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--color-gray-800);
-    padding: 0.75rem 0;
-    color: var(--color-white);
-    font-size: 0.875rem;
-    font-family: 'Space Grotesk', sans-serif;
-    outline: none;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--color-gray-800) !important;
+    padding: 0.75rem 0 !important;
+    color: var(--color-white) !important;
+    font-size: 0.875rem !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    outline: none !important;
     transition: border-color 0.3s;
 }
 
 .form-step .wpcf7-form-control.wpcf7-text:focus,
 .form-step .wpcf7-form-control.wpcf7-tel:focus,
-.form-step .wpcf7-form-control.wpcf7-email:focus {
-    border-color: var(--color-white);
+.form-step .wpcf7-form-control.wpcf7-email:focus,
+.cf7-form-wrap .form-step .wpcf7-form-control:focus {
+    border-color: var(--color-white) !important;
+    border-bottom-color: var(--color-white) !important;
 }
 
 .form-step .wpcf7-form-control::placeholder {
