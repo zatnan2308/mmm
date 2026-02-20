@@ -117,6 +117,10 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
                 <span>&copy; <?php echo date( 'Y' ); ?> MMM Automotive</span>
                 <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy</a>
                 <a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>">Terms</a>
+                <a href="<?php echo esc_url( home_url( '/cookie-policy/' ) ); ?>">Cookies</a>
+            </div>
+            <div class="footer-credit">
+                Website by <a href="https://webmarketit.site/" target="_blank" rel="noopener">Alexey Kachan — Web Market IT</a>
             </div>
         </div>
     </div>
@@ -131,6 +135,17 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
 <button class="fab-scroll-top" id="fab-scroll-top" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
 </button>
+
+<!-- Cookie Consent Banner -->
+<div class="cookie-banner" id="cookie-banner">
+    <div class="cookie-banner-inner">
+        <p class="cookie-banner-text">We use cookies to improve your experience and analyze site traffic. By continuing to browse, you agree to our use of cookies. <a href="/cookie-policy/">Cookie Policy</a></p>
+        <div class="cookie-banner-actions">
+            <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Decline</button>
+            <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept All</button>
+        </div>
+    </div>
+</div>
 
 <?php wp_footer(); ?>
 </body>

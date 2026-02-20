@@ -400,6 +400,38 @@
         setTimeout(initStepForms, 3000);
     })();
 
+    /* ── Cookie Consent Banner ───────────── */
+    (function() {
+        var banner = document.getElementById('cookie-banner');
+        var acceptBtn = document.getElementById('cookie-accept');
+        var declineBtn = document.getElementById('cookie-decline');
+        if (!banner) return;
+
+        /* Check if consent already given */
+        var consent = localStorage.getItem('mmm_cookie_consent');
+        if (!consent) {
+            setTimeout(function() { banner.classList.add('visible'); }, 1500);
+        }
+
+        function hideBanner() {
+            banner.classList.remove('visible');
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('mmm_cookie_consent', 'accepted');
+                hideBanner();
+            });
+        }
+
+        if (declineBtn) {
+            declineBtn.addEventListener('click', function() {
+                localStorage.setItem('mmm_cookie_consent', 'declined');
+                hideBanner();
+            });
+        }
+    })();
+
     /* ── Smart Booking Button ───────────────── */
     document.querySelectorAll('[data-booking]').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
