@@ -944,78 +944,18 @@ if ( $svc_content ) : ?>
                 <p class="booking-status-text">Our team is currently accepting new appointments. Please fill out the form for a quick response.</p>
             </div>
         </div>
-        <div>
-            <form id="mmm-booking-form" class="booking-form" novalidate>
-                <?php wp_nonce_field( 'mmm_booking_nonce', 'mmm_nonce' ); ?>
-                <div class="form-row form-row-2" style="margin-bottom: 2.5rem;">
-                    <div class="form-group">
-                        <input type="text" id="fname" name="fname" class="form-input" placeholder="Name" required>
-                        <label for="fname" class="form-label">First name*</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="lname" name="lname" class="form-input" placeholder="Last Name" required>
-                        <label for="lname" class="form-label">Last name*</label>
-                    </div>
-                </div>
-                <div class="form-row form-row-2" style="margin-bottom: 2.5rem;">
-                    <div class="form-group">
-                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="Phone" required>
-                        <label for="phone" class="form-label">Phone*</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
-                        <label for="email" class="form-label">Email*</label>
-                    </div>
-                </div>
-                <div class="form-row form-row-3" style="margin-bottom: 2.5rem;">
-                    <div class="form-group">
-                        <input type="text" id="make" name="make" class="form-input" placeholder="Make" required>
-                        <label for="make" class="form-label">Make*</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="model" name="model" class="form-input" placeholder="Model" required>
-                        <label for="model" class="form-label">Model*</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="year" name="year" class="form-input" placeholder="Year" required>
-                        <label for="year" class="form-label">Year*</label>
-                    </div>
-                </div>
-                <div style="margin-bottom: 2.5rem;">
-                    <span class="booking-label" style="margin-bottom: 1.5rem;">Service needed*</span>
-                    <div class="service-checkboxes">
-                        <?php
-                        $checkbox_services = array( 'General Auto Repair', 'Oil Change & Maintenance', 'Wheel Alignment', 'Brakes Service', 'AC & Heating', 'Diagnostics', 'Battery Service', 'Tires / Wheels', 'Suspension', 'Scheduled Maintenance', 'Pre-purchase Inspection', 'Electrical Repair', 'Other' );
-                        $precheck = isset( $svc['precheck'] ) ? $svc['precheck'] : '';
-                        foreach ( $checkbox_services as $csvc ) :
-                            $is_checked = ( $csvc === $precheck );
-                        ?>
-                        <label class="checkbox-label">
-                            <div class="checkbox-wrap">
-                                <input type="checkbox" name="services[]" value="<?php echo esc_attr( $csvc ); ?>"<?php checked( $is_checked ); ?>>
-                                <div class="checkbox-indicator"></div>
-                            </div>
-                            <span class="checkbox-text<?php echo $is_checked ? ' checked-text' : ''; ?>"><?php echo esc_html( $csvc ); ?></span>
-                        </label>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="form-group" style="margin-bottom: 2.5rem;">
-                    <input type="text" id="vin" name="vin" class="form-input" placeholder="VIN">
-                    <label for="vin" class="form-label">VIN (Optional)</label>
-                </div>
-                <div class="consent-row">
-                    <div class="checkbox-wrap">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <div class="checkbox-indicator"></div>
-                    </div>
-                    <label for="consent" class="consent-label">
-                        I agree to be contacted about my appointment. See our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
-                    </label>
-                </div>
-                <button type="submit" class="submit-btn">Submit Request</button>
-                <div id="form-message" style="margin-top: 1rem; text-align: center; display: none;"></div>
-            </form>
+        <div class="cf7-form-wrap">
+            <?php
+            $booking_cf7 = '';
+            if ( function_exists( 'get_field' ) ) {
+                $booking_cf7 = get_field( 'booking_cf7_shortcode' );
+            }
+            if ( $booking_cf7 ) {
+                echo do_shortcode( $booking_cf7 );
+            } else {
+                echo '<p style="color: var(--color-gray-500);">Configure the booking form in Page Settings → Booking tab.</p>';
+            }
+            ?>
         </div>
     </div>
 </section>
