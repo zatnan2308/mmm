@@ -2287,7 +2287,7 @@ button {
 .form-step .wpcf7-form-control.wpcf7-text,
 .form-step .wpcf7-form-control.wpcf7-tel,
 .form-step .wpcf7-form-control.wpcf7-email,
-.cf7-form-wrap .form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance) {
+.cf7-form-wrap .form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-select) {
     width: 100%;
     background: transparent !important;
     border: none !important;
@@ -4584,7 +4584,7 @@ button {
     color: var(--color-white) !important;
 }
 
-/* Inputs */
+/* Inputs (exclude select to preserve arrow) */
 .form-step .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-acceptance):not(.wpcf7-select) {
     border: none !important;
     border-bottom: 1px solid var(--color-gray-800) !important;
