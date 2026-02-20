@@ -297,58 +297,110 @@
 
     /* ── Two-Step Form Navigation ───────── */
     (function() {
-        document.querySelectorAll('.wpcf7-form').forEach(function(form) {
-            var steps = form.querySelectorAll('.form-step');
-            if (steps.length < 2) return;
+        function initStepForms() {
+            /* Find forms inside .cf7-form-wrap OR .wpcf7-form */
+            var wraps = document.querySelectorAll('.cf7-form-wrap, .wpcf7');
+            wraps.forEach(function(wrap) {
+                if (wrap.dataset.stepsInit) return; /* already initialised */
+                var steps = wrap.querySelectorAll('.form-step');
+                if (steps.length < 2) return;
 
-            var indicators = form.querySelectorAll('.step-ind');
-            var line = form.querySelector('.step-line');
-            var current = 0;
+                wrap.dataset.stepsInit = '1';
+                var indicators = wrap.querySelectorAll('.step-ind');
+                var line = wrap.querySelector('.step-line');
+                var current = 0;
 
-            function goTo(n) {
-                steps[current].classList.remove('active');
-                steps[n].classList.add('active');
+                /* Make sure first step is active */
+                steps[0].classList.add('active');
+                if (indicators[0]) indicators[0].classList.add('active');
 
-                indicators.forEach(function(ind, i) {
-                    ind.classList.remove('active', 'completed');
-                    if (i < n) ind.classList.add('completed');
-                    if (i === n) ind.classList.add('active');
-                });
+                function goTo(n) {
+                    steps[current].classList.remove('active');
+                    steps[n].classList.add('active');
 
-                if (line) {
-                    if (n > 0) line.classList.add('filled');
-                    else line.classList.remove('filled');
+                    indicators.forEach(function(ind, i) {
+                        ind.classList.remove('active', 'completed');
+                        if (i < n) ind.classList.add('completed');
+                        if (i === n) ind.classList.add('active');
+                    });
+
+                    if (line) {
+                        if (n > 0) line.classList.add('filled');
+                        else line.classList.remove('filled');
+                    }
+
+                    current = n;
+
+                    /* Scroll form into view */
+                    var section = wrap.closest('.booking-section') || wrap;
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
 
-                current = n;
-            }
-
-            /* Next button — validate step 1 fields */
-            form.querySelectorAll('.step-next-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var valid = true;
-                    var fields = steps[current].querySelectorAll('input[aria-required="true"], input[required]');
-                    fields.forEach(function(f) {
-                        if (!f.value.trim()) {
-                            valid = false;
-                            f.style.borderColor = '#ef4444';
-                            f.addEventListener('input', function handler() {
-                                f.style.borderColor = '';
-                                f.removeEventListener('input', handler);
-                            });
-                        }
+                /* Next button — validate step 1 fields */
+                wrap.querySelectorAll('.step-next-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var valid = true;
+                        var fields = steps[current].querySelectorAll(
+                            'input[aria-required="true"], .wpcf7-validates-as-required'
+                        );
+                        fields.forEach(function(f) {
+                            if (!f.value || !f.value.trim()) {
+                                valid = false;
+                                f.style.borderColor = '#ef4444';
+                                f.addEventListener('input', function handler() {
+                                    f.style.borderColor = '';
+                                    f.removeEventListener('input', handler);
+                                });
+                            }
+                        });
+                        if (valid && current < steps.length - 1) goTo(current + 1);
                     });
-                    if (valid && current < steps.length - 1) goTo(current + 1);
                 });
-            });
 
-            /* Back button */
-            form.querySelectorAll('.step-back-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    if (current > 0) goTo(current - 1);
+                /* Back button */
+                wrap.querySelectorAll('.step-back-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (current > 0) goTo(current - 1);
+                    });
                 });
             });
-        });
+        }
+
+        /* Float labels for CF7 fields (input is inside span, label is sibling of span) */
+        function initFloatLabels() {
+            document.querySelectorAll('.form-step .form-group').forEach(function(group) {
+                var input = group.querySelector('input, select');
+                var label = group.querySelector('.form-label');
+                if (!input || !label) return;
+                if (group.dataset.floatInit) return;
+                group.dataset.floatInit = '1';
+
+                function check() {
+                    if (input.value && input.value.trim()) {
+                        label.classList.add('floated');
+                    } else if (document.activeElement !== input) {
+                        label.classList.remove('floated');
+                    }
+                }
+
+                input.addEventListener('focus', function() { label.classList.add('floated'); });
+                input.addEventListener('blur', check);
+                input.addEventListener('input', check);
+                check();
+            });
+        }
+
+        /* Run immediately */
+        initStepForms();
+        initFloatLabels();
+        /* Re-run after CF7 finishes rendering (it can be async) */
+        setTimeout(function() { initStepForms(); initFloatLabels(); }, 500);
+        setTimeout(function() { initStepForms(); initFloatLabels(); }, 1500);
+        /* Also listen for CF7 init event */
+        document.addEventListener('wpcf7mailsent', function() { initStepForms(); });
+        document.addEventListener('wpcf7invalid', function() { /* keep current step */ });
     })();
 
     /* ── Smart Booking Button ───────────────── */

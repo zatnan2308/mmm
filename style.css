@@ -2192,13 +2192,17 @@ button {
     width: 100%;
 }
 
-/* Form Steps */
-.form-step {
-    display: none;
+/* Form Steps — high specificity to override CF7 */
+.wpcf7 .form-step,
+.wpcf7-form .form-step,
+.cf7-form-wrap .form-step {
+    display: none !important;
 }
 
-.form-step.active {
-    display: block;
+.wpcf7 .form-step.active,
+.wpcf7-form .form-step.active,
+.cf7-form-wrap .form-step.active {
+    display: block !important;
     animation: stepFadeIn 0.3s ease;
 }
 
@@ -2271,6 +2275,60 @@ button {
     background: rgba(255,255,255,0.05);
 }
 
+/* CF7 input fields styling */
+.form-step .wpcf7-form-control-wrap {
+    display: block;
+    width: 100%;
+}
+
+.form-step .wpcf7-form-control.wpcf7-text,
+.form-step .wpcf7-form-control.wpcf7-tel,
+.form-step .wpcf7-form-control.wpcf7-email {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-gray-800);
+    padding: 0.75rem 0;
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-family: 'Space Grotesk', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-step .wpcf7-form-control.wpcf7-text:focus,
+.form-step .wpcf7-form-control.wpcf7-tel:focus,
+.form-step .wpcf7-form-control.wpcf7-email:focus {
+    border-color: var(--color-white);
+}
+
+.form-step .wpcf7-form-control::placeholder {
+    color: transparent;
+}
+
+/* Float label for CF7 fields */
+.form-step .form-group {
+    position: relative;
+}
+
+.form-step .form-group .form-label {
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+    pointer-events: none;
+}
+
+.form-step .form-group .form-label.floated {
+    top: -0.875rem;
+    font-size: 0.75rem;
+    color: var(--color-white);
+}
+
 /* CF7 select styling */
 .form-label-static {
     display: block;
@@ -2313,7 +2371,8 @@ button {
 }
 
 /* CF7 submit inside step form */
-.form-step .wpcf7-submit {
+.form-step .wpcf7-submit,
+.cf7-form-wrap .wpcf7-submit {
     background: var(--color-white);
     color: var(--color-black);
     border: none;
@@ -2327,8 +2386,39 @@ button {
     transition: background 0.3s;
 }
 
-.form-step .wpcf7-submit:hover {
+.form-step .wpcf7-submit:hover,
+.cf7-form-wrap .wpcf7-submit:hover {
     background: #e5e7eb;
+}
+
+/* CF7 acceptance checkbox styling */
+.form-step .wpcf7-acceptance input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid var(--color-gray-600);
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.form-step .wpcf7-acceptance input[type="checkbox"]:checked {
+    background: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.form-step .wpcf7-acceptance .wpcf7-list-item-label {
+    font-size: 10px;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-step .wpcf7-acceptance .wpcf7-list-item-label a {
+    color: var(--color-white);
+    text-decoration: underline;
 }
 
 /* CF7 validation messages */
