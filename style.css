@@ -2303,30 +2303,23 @@ button {
 }
 
 .form-step .wpcf7-form-control::placeholder {
-    color: transparent;
+    color: var(--color-gray-700);
 }
 
-/* Float label for CF7 fields */
+/* Static label above input */
 .form-step .form-group {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-step .form-group .form-label {
-    position: absolute;
-    left: 0;
-    top: 0.75rem;
-    font-size: 0.875rem;
-    color: var(--color-gray-600);
+    position: static;
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    transition: all 0.3s;
-    pointer-events: none;
-}
-
-.form-step .form-group .form-label.floated {
-    top: -0.875rem;
-    font-size: 0.75rem;
-    color: var(--color-white);
+    margin-bottom: 0.25rem;
 }
 
 /* CF7 select styling */

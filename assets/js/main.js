@@ -368,36 +368,11 @@
             });
         }
 
-        /* Float labels for CF7 fields (input is inside span, label is sibling of span) */
-        function initFloatLabels() {
-            document.querySelectorAll('.form-step .form-group').forEach(function(group) {
-                var input = group.querySelector('input, select');
-                var label = group.querySelector('.form-label');
-                if (!input || !label) return;
-                if (group.dataset.floatInit) return;
-                group.dataset.floatInit = '1';
-
-                function check() {
-                    if (input.value && input.value.trim()) {
-                        label.classList.add('floated');
-                    } else if (document.activeElement !== input) {
-                        label.classList.remove('floated');
-                    }
-                }
-
-                input.addEventListener('focus', function() { label.classList.add('floated'); });
-                input.addEventListener('blur', check);
-                input.addEventListener('input', check);
-                check();
-            });
-        }
-
         /* Run immediately */
         initStepForms();
-        initFloatLabels();
         /* Re-run after CF7 finishes rendering (it can be async) */
-        setTimeout(function() { initStepForms(); initFloatLabels(); }, 500);
-        setTimeout(function() { initStepForms(); initFloatLabels(); }, 1500);
+        setTimeout(initStepForms, 500);
+        setTimeout(initStepForms, 1500);
         /* Also listen for CF7 init event */
         document.addEventListener('wpcf7mailsent', function() { initStepForms(); });
         document.addEventListener('wpcf7invalid', function() { /* keep current step */ });
