@@ -212,14 +212,14 @@ $reviews_shortcode = mmm_acf( 'testimonials_shortcode', '' );
 if ( $reviews_shortcode ) :
 ?>
 <section class="testimonials-section reveal">
-    <h2 class="testimonials-title">TESTIMONIALS.</h2>
+    <h2 class="testimonials-title">Client Reviews</h2>
     <div class="trustindex-wrap">
         <?php echo do_shortcode( $reviews_shortcode ); ?>
     </div>
 </section>
 <?php else : ?>
 <section class="testimonials-section reveal">
-    <h2 class="testimonials-title">TESTIMONIALS.</h2>
+    <h2 class="testimonials-title">Client Reviews</h2>
     <p style="text-align: center; color: var(--color-gray-500); padding: 3rem 0;">Configure Google Reviews in Page Settings → Testimonials tab.</p>
 </section>
 <?php endif; ?>
