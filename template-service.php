@@ -714,9 +714,9 @@ if ( function_exists( 'get_field' ) ) {
     $acf_def_img = get_field( 'svc_included_default_img' );
     if ( $acf_def_img ) $svc['included_default_img'] = $acf_def_img;
 
-    // Gallery
+    // Gallery — ACF only, no hardcoded fallback
     $acf_gallery = get_field( 'svc_gallery' );
-    if ( $acf_gallery ) {
+    if ( $acf_gallery && is_array( $acf_gallery ) ) {
         $svc['gallery'] = array();
         foreach ( $acf_gallery as $g ) {
             $svc['gallery'][] = array(
@@ -724,6 +724,8 @@ if ( function_exists( 'get_field' ) ) {
                 'caption' => $g['alt'] ? $g['alt'] : $g['title'],
             );
         }
+    } else {
+        $svc['gallery'] = array(); // hide if ACF gallery not filled
     }
 
     // CTA
