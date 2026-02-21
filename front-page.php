@@ -45,7 +45,7 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
      ═══════════════════════════════════════════ -->
 <section id="home" class="hero-section">
     <div class="hero-bg">
-        <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">
+        <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="litespeed-disable-lazyload" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync" data-no-lazy="1">
     </div>
 
     <div class="hero-content">

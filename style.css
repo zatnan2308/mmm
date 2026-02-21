@@ -5403,12 +5403,12 @@ button {
 /* Lift WhatsApp & scroll-top when banner is visible */
 body.cookie-banner-active .fab-whatsapp,
 body.cookie-banner-active .fab-scroll-top {
-    margin-bottom: 60px;
+    transform: translateY(-70px);
 }
 
 .fab-whatsapp,
 .fab-scroll-top {
-    transition: margin-bottom 0.4s ease, opacity 0.3s, background 0.3s;
+    transition: transform 0.4s ease, opacity 0.3s, background 0.3s;
 }
 
 .cookie-banner-inner {
@@ -5502,6 +5502,6 @@ body.cookie-banner-active .fab-scroll-top {
 
     body.cookie-banner-active .fab-whatsapp,
     body.cookie-banner-active .fab-scroll-top {
-        margin-bottom: 110px;
+        transform: translateY(-130px);
     }
 }
