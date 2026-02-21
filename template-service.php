@@ -944,7 +944,8 @@ if ( $svc_content ) : ?>
                 <p class="booking-status-text">Our team is currently accepting new appointments. Please fill out the form for a quick response.</p>
             </div>
         </div>
-        <div class="cf7-form-wrap">
+        <?php $default_svc = isset( $svc['precheck'] ) ? $svc['precheck'] : ''; ?>
+        <div class="cf7-form-wrap" data-default-service="<?php echo esc_attr( $default_svc ); ?>">
             <?php
             $booking_cf7 = '';
             if ( function_exists( 'get_field' ) ) {
