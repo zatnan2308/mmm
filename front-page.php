@@ -50,21 +50,21 @@ $gallery_title = mmm_acf( 'gallery_title', 'SERVICE IN PROGRESS.' );
 
     <div class="hero-content">
         <div class="hero-inner">
-            <div class="hero-badge animate-fade-in-up">
+            <div class="hero-badge">
                 <span><?php echo esc_html( $hero_badge ); ?></span>
             </div>
 
-            <h1 class="hero-title animate-fade-in-up">
+            <h1 class="hero-title">
                 <?php echo esc_html( $hero_line1 ); ?> <br>
                 <span class="gradient-text"><?php echo esc_html( $hero_highlight ); ?></span> <br>
                 <?php echo esc_html( $hero_line3 ); ?>
             </h1>
 
-            <p class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.1s;">
+            <p class="hero-subtitle">
                 <?php echo esc_html( $hero_subtitle ); ?>
             </p>
 
-            <div class="hero-buttons animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="hero-buttons">
                 <a href="#appointment" class="hero-btn-primary">
                     <div class="btn-bg"></div>
                     <span><?php echo esc_html( $hero_btn1 ); ?></span>
