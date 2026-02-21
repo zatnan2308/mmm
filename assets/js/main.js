@@ -449,6 +449,29 @@
         }
     })();
 
+    /* ── Auto-select default service in CF7 booking form ── */
+    (function() {
+        var wrap = document.querySelector('.cf7-form-wrap[data-default-service]');
+        if (!wrap) return;
+        var defaultSvc = wrap.getAttribute('data-default-service');
+        if (!defaultSvc) return;
+
+        function setDefault() {
+            var sel = wrap.querySelector('select[name="service"]');
+            if (!sel) return;
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].value === defaultSvc) {
+                    sel.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        setDefault();
+        setTimeout(setDefault, 500);
+        setTimeout(setDefault, 1500);
+    })();
+
     /* ── Smart Booking Button ───────────────── */
     document.querySelectorAll('[data-booking]').forEach(function(btn) {
         btn.addEventListener('click', function(e) {

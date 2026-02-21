@@ -339,6 +339,30 @@ acf_add_local_field_group( array(
             'instructions'  => 'Paste the CF7 shortcode, e.g. [contact-form-7 id="123" title="Booking"]',
             'placeholder'   => '[contact-form-7 id="" title="Booking Form"]',
         ),
+        array(
+            'key'           => 'field_booking_default_service',
+            'label'         => 'Default Service',
+            'name'          => 'booking_default_service',
+            'type'          => 'select',
+            'instructions'  => 'Auto-select this service in the booking form dropdown',
+            'choices'       => array(
+                ''                         => '— None —',
+                'General Auto Repair'      => 'General Auto Repair',
+                'Oil Change & Maintenance' => 'Oil Change & Maintenance',
+                'Wheel Alignment'          => 'Wheel Alignment',
+                'Brake Service'            => 'Brake Service',
+                'AC & Heating'             => 'AC & Heating',
+                'Diagnostics'              => 'Diagnostics',
+                'Battery Service'          => 'Battery Service',
+                'Tires / Wheels'           => 'Tires / Wheels',
+                'Suspension'               => 'Suspension',
+                'Scheduled Maintenance'    => 'Scheduled Maintenance',
+                'Pre-purchase Inspection'  => 'Pre-purchase Inspection',
+                'Electrical Repair'        => 'Electrical Repair',
+                'Other'                    => 'Other',
+            ),
+            'default_value' => '',
+        ),
 
         /* ── GALLERY TAB ──────────────────────── */
         array(

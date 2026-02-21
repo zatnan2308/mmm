@@ -273,7 +273,8 @@ $brands_title = mmm_acf( 'brands_title', 'BRANDS WE SERVICE.' );
             </div>
         </div>
 
-        <div class="cf7-form-wrap">
+        <?php $default_svc = mmm_acf( 'booking_default_service', '' ); ?>
+        <div class="cf7-form-wrap" data-default-service="<?php echo esc_attr( $default_svc ); ?>">
             <?php
             $booking_cf7 = mmm_acf( 'booking_cf7_shortcode', '' );
             if ( $booking_cf7 ) {
