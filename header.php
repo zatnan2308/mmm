@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
 
     <!-- Preload hero LCP image -->
     <?php
@@ -21,7 +20,7 @@
     if ( $is_front ) {
         $lcp_img = mmm_get( 'mmm_hero_image', '' );
         if ( $lcp_img ) {
-            echo '<link rel="preload" as="image" href="' . esc_url( $lcp_img ) . '">' . "\n";
+            echo '<link rel="preload" as="image" href="' . esc_url( $lcp_img ) . '" fetchpriority="high">' . "\n";
         }
     }
     ?>

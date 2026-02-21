@@ -136,16 +136,7 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
     <i class="fas fa-chevron-up"></i>
 </button>
 
-<!-- Cookie Consent Banner -->
-<div class="cookie-banner" id="cookie-banner">
-    <div class="cookie-banner-inner">
-        <p class="cookie-banner-text">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept", you consent to our use of cookies. <a href="/cookie-policy/">Read Cookie Policy</a>.</p>
-        <div class="cookie-banner-actions">
-            <button class="cookie-btn cookie-btn-accept" id="cookie-accept">ACCEPT</button>
-            <button class="cookie-btn-close" id="cookie-decline" aria-label="Close">&times;</button>
-        </div>
-    </div>
-</div>
+<!-- Cookie banner injected by JS after page load to avoid LCP impact -->
 
 <?php wp_footer(); ?>
 </body>

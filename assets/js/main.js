@@ -400,39 +400,52 @@
         setTimeout(initStepForms, 3000);
     })();
 
-    /* ── Cookie Consent Banner ───────────── */
+    /* ── Cookie Consent Banner (injected after load to avoid LCP) ── */
     (function() {
-        var banner = document.getElementById('cookie-banner');
-        var acceptBtn = document.getElementById('cookie-accept');
-        var declineBtn = document.getElementById('cookie-decline');
-        if (!banner) return;
+        /* Skip entirely if consent already given */
+        if (localStorage.getItem('mmm_cookie_consent')) return;
 
-        /* Check if consent already given */
-        var consent = localStorage.getItem('mmm_cookie_consent');
-        if (!consent) {
+        function initCookieBanner() {
+            var banner = document.createElement('div');
+            banner.className = 'cookie-banner';
+            banner.id = 'cookie-banner';
+            banner.innerHTML =
+                '<div class="cookie-banner-inner">' +
+                    '<p class="cookie-banner-text">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking &ldquo;Accept&rdquo;, you consent to our use of cookies. <a href="/cookie-policy/">Read Cookie Policy</a>.</p>' +
+                    '<div class="cookie-banner-actions">' +
+                        '<button class="cookie-btn cookie-btn-accept" id="cookie-accept">ACCEPT</button>' +
+                        '<button class="cookie-btn-close" id="cookie-decline" aria-label="Close">&times;</button>' +
+                    '</div>' +
+                '</div>';
+            document.body.appendChild(banner);
+
+            /* Show after short delay */
             setTimeout(function() {
                 banner.classList.add('visible');
                 document.body.classList.add('cookie-banner-active');
-            }, 1500);
-        }
+            }, 300);
 
-        function hideBanner() {
-            banner.classList.remove('visible');
-            document.body.classList.remove('cookie-banner-active');
-        }
+            function hideBanner() {
+                banner.classList.remove('visible');
+                document.body.classList.remove('cookie-banner-active');
+            }
 
-        if (acceptBtn) {
-            acceptBtn.addEventListener('click', function() {
+            banner.querySelector('#cookie-accept').addEventListener('click', function() {
                 localStorage.setItem('mmm_cookie_consent', 'accepted');
                 hideBanner();
             });
-        }
 
-        if (declineBtn) {
-            declineBtn.addEventListener('click', function() {
+            banner.querySelector('#cookie-decline').addEventListener('click', function() {
                 localStorage.setItem('mmm_cookie_consent', 'declined');
                 hideBanner();
             });
+        }
+
+        /* Wait for window.load so banner doesn't affect LCP */
+        if (document.readyState === 'complete') {
+            initCookieBanner();
+        } else {
+            window.addEventListener('load', initCookieBanner);
         }
     })();
 
