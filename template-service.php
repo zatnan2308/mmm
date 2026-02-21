@@ -944,7 +944,13 @@ if ( $svc_content ) : ?>
                 <p class="booking-status-text">Our team is currently accepting new appointments. Please fill out the form for a quick response.</p>
             </div>
         </div>
-        <?php $default_svc = isset( $svc['precheck'] ) ? $svc['precheck'] : ''; ?>
+        <?php
+        $default_svc = isset( $svc['precheck'] ) ? $svc['precheck'] : '';
+        if ( function_exists( 'get_field' ) ) {
+            $acf_default = get_field( 'svc_default_service' );
+            if ( $acf_default ) $default_svc = $acf_default;
+        }
+        ?>
         <div class="cf7-form-wrap" data-default-service="<?php echo esc_attr( $default_svc ); ?>">
             <?php
             $booking_cf7 = '';
