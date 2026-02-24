@@ -486,3 +486,11 @@
         });
     });
 })();
+
+/* ══════════════════════════════════════════════
+   CF7 → THANK YOU PAGE REDIRECT
+   ══════════════════════════════════════════════ */
+
+document.addEventListener('wpcf7mailsent', function () {
+    window.location.href = '/thank-you-page/';
+}, false);
