@@ -984,3 +984,68 @@ acf_add_local_field_group( array(
         ),
     ),
 ) );
+
+/* ══════════════════════════════════════════════
+   THANK YOU PAGE FIELDS
+   ══════════════════════════════════════════════ */
+
+acf_add_local_field_group( array(
+    'key'      => 'group_thankyou_page',
+    'title'    => 'Thank You Page Settings',
+    'location' => array(
+        array(
+            array(
+                'param'    => 'page_template',
+                'operator' => '==',
+                'value'    => 'template-thankyou.php',
+            ),
+        ),
+    ),
+    'menu_order' => 0,
+    'style'      => 'default',
+    'fields'     => array(
+
+        array(
+            'key'           => 'field_ty_title',
+            'label'         => 'Title',
+            'name'          => 'ty_title',
+            'type'          => 'text',
+            'default_value' => 'Thank You',
+            'instructions'  => 'Main heading on the thank you page',
+        ),
+        array(
+            'key'           => 'field_ty_description',
+            'label'         => 'Description',
+            'name'          => 'ty_description',
+            'type'          => 'textarea',
+            'rows'          => 3,
+            'default_value' => 'Your request has been received. We will get back to you shortly.',
+            'instructions'  => 'Text below the title',
+        ),
+        array(
+            'key'           => 'field_ty_button_text',
+            'label'         => 'Button Text',
+            'name'          => 'ty_button_text',
+            'type'          => 'text',
+            'default_value' => 'Back to Home',
+            'instructions'  => 'Text inside the CTA button',
+        ),
+        array(
+            'key'           => 'field_ty_button_url',
+            'label'         => 'Button URL',
+            'name'          => 'ty_button_url',
+            'type'          => 'url',
+            'default_value' => '',
+            'instructions'  => 'Where the button links to. Leave empty for homepage.',
+        ),
+        array(
+            'key'           => 'field_ty_background_image',
+            'label'         => 'Background Image',
+            'name'          => 'ty_background_image',
+            'type'          => 'image',
+            'return_format' => 'array',
+            'preview_size'  => 'medium',
+            'instructions'  => 'Full-screen background image for the page',
+        ),
+    ),
+) );
