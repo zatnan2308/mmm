@@ -875,26 +875,49 @@ if ( $svc_content ) : ?>
 </section>
 <?php endif; ?>
 
-<!-- ═══ WORK GALLERY SLIDER ═══ -->
+<!-- ═══ WORK GALLERY ═══ -->
 <?php if ( ! empty( $svc['gallery'] ) ) : ?>
 <section class="work-gallery reveal">
     <div class="work-gallery-inner">
         <h2>Our Work Gallery</h2>
-        <button class="gallery-arrow prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
-        <button class="gallery-arrow next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
-        <div class="gallery-slider scrollbar-hide" id="galleryContainer">
-            <?php foreach ( $svc['gallery'] as $slide ) : ?>
-            <div class="gallery-slide">
-                <img src="<?php echo esc_url( $slide['img'] ); ?>" alt="<?php echo esc_attr( $slide['caption'] ); ?>" loading="lazy">
-                <div class="slide-caption"><span><?php echo esc_html( $slide['caption'] ); ?></span></div>
+        <div class="wg-carousel">
+            <button class="wg-arrow wg-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <button class="wg-arrow wg-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="wg-track" id="wgTrack">
+                <?php foreach ( $svc['gallery'] as $idx => $slide ) : ?>
+                <div class="wg-slide" data-wg-index="<?php echo $idx; ?>" data-full="<?php echo esc_url( $slide['img'] ); ?>" data-caption="<?php echo esc_attr( $slide['caption'] ); ?>">
+                    <img src="<?php echo esc_url( $slide['img'] ); ?>" alt="<?php echo esc_attr( $slide['caption'] ); ?>" loading="lazy">
+                    <div class="wg-zoom"><i class="fas fa-search-plus"></i></div>
+                    <div class="wg-caption"><span><?php echo esc_html( $slide['caption'] ); ?></span></div>
+                </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-        <div class="gallery-dots">
-            <?php foreach ( $svc['gallery'] as $s ) : ?><span></span><?php endforeach; ?>
+        <div class="wg-dots">
+            <?php foreach ( $svc['gallery'] as $idx => $s ) : ?>
+            <button class="wg-dot<?php echo $idx === 0 ? ' active' : ''; ?>" data-index="<?php echo $idx; ?>"></button>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
+
+<!-- Lightbox -->
+<div id="wg-lightbox" class="lb" aria-hidden="true" role="dialog" aria-label="Work gallery">
+    <div class="lb-overlay"></div>
+    <div class="lb-wrap">
+        <div class="lb-topbar">
+            <span class="lb-counter"></span>
+            <button class="lb-close" aria-label="Close gallery"><i class="fas fa-times"></i></button>
+        </div>
+        <button class="lb-arrow lb-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <button class="lb-arrow lb-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        <div class="lb-stage">
+            <img class="lb-img" src="" alt="" draggable="false">
+            <div class="lb-spinner"><div></div></div>
+        </div>
+        <p class="lb-caption"></p>
+    </div>
+</div>
 <?php endif; ?>
 
 <!-- ═══ BIG CTA ═══ -->
