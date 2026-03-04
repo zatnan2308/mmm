@@ -73,22 +73,43 @@
         });
     });
 
-    /* ── Scroll Reveal Animation ─────────────── */
-    function reveal() {
+    /* ── Scroll Reveal (IntersectionObserver) ── */
+    (function () {
         var reveals = document.querySelectorAll('.reveal');
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
-
-            if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add('active');
-            }
+        if (!reveals.length) return;
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('active');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -100px 0px' });
+            reveals.forEach(function (el) { io.observe(el); });
+        } else {
+            reveals.forEach(function (el) { el.classList.add('active'); });
         }
-    }
+    })();
 
-    window.addEventListener('scroll', reveal);
-    reveal();
+    /* ── Lazy-load Google Maps iframes ─────── */
+    (function () {
+        var frames = document.querySelectorAll('iframe[data-src]');
+        if (!frames.length) return;
+        if (!('IntersectionObserver' in window)) {
+            frames.forEach(function (f) { f.src = f.getAttribute('data-src'); });
+            return;
+        }
+        var mio = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.src = e.target.getAttribute('data-src');
+                    mio.unobserve(e.target);
+                }
+            });
+        }, { rootMargin: '200px' });
+        frames.forEach(function (f) { mio.observe(f); });
+    })();
 
     /* ── Mega Menu Hover ───────────────────── */
     var megaParents = document.querySelectorAll('.mega-menu-parent');
@@ -306,6 +327,7 @@
         var dots      = document.querySelectorAll('.wg-dot');
         var total     = slides.length;
         if (!total) return;
+        var gapVal    = parseInt(getComputedStyle(track).gap) || 16; // cache once
 
         // ── Carousel scroll ──
         function scrollToSlide(idx) {
@@ -316,7 +338,7 @@
 
         function updateDots() {
             var scrollLeft = track.scrollLeft;
-            var slideW = slides[0].offsetWidth + (parseInt(getComputedStyle(track).gap) || 16);
+            var slideW = slides[0].offsetWidth + gapVal;
             var active = Math.round(scrollLeft / slideW);
             dots.forEach(function (d, i) {
                 d.classList.toggle('active', i === active);
@@ -327,11 +349,11 @@
         }
 
         if (prevBtn) prevBtn.addEventListener('click', function () {
-            var slideW = slides[0].offsetWidth + (parseInt(getComputedStyle(track).gap) || 16);
+            var slideW = slides[0].offsetWidth + gapVal;
             track.scrollBy({ left: -slideW, behavior: 'smooth' });
         });
         if (nextBtn) nextBtn.addEventListener('click', function () {
-            var slideW = slides[0].offsetWidth + (parseInt(getComputedStyle(track).gap) || 16);
+            var slideW = slides[0].offsetWidth + gapVal;
             track.scrollBy({ left: slideW, behavior: 'smooth' });
         });
 

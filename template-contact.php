@@ -139,12 +139,11 @@ $maps_link  = mmm_acf( 'contact_map_link', 'https://maps.app.goo.gl/cMp6fF1br7NC
      ═══════════════════════════════════════════ -->
 <section class="contact-map-section">
     <iframe
-        src="<?php echo esc_url( $maps_embed ); ?>"
+        data-src="<?php echo esc_url( $maps_embed ); ?>"
         width="100%"
         height="100%"
         style="border:0;"
         allowfullscreen=""
-        loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         class="contact-map-iframe"
         title="MMM Automotive Location">
