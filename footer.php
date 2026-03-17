@@ -126,9 +126,10 @@ $whatsapp   = mmm_get( 'mmm_whatsapp', '#' );
 </footer>
 
 <!-- Floating Buttons -->
-<a href="https://wa.me/message/AGJR3QRL2I5TC1" class="fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-    <span class="fab-wa-ping"></span>
+<a href="tel:+17029549773" class="fab-phone" aria-label="Call (702) 954-9773">
+    <i class="fas fa-phone-alt"></i>
+    <span class="fab-phone-ping"></span>
+    <span class="fab-phone-tooltip">Call Now</span>
 </a>
 
 <button class="fab-scroll-top" id="fab-scroll-top" aria-label="Back to top">

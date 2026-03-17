@@ -633,6 +633,18 @@
             }
         });
     });
+
+    /* ── FAB Phone Tooltip (show after 4s) ──── */
+    (function () {
+        var tip = document.querySelector('.fab-phone-tooltip');
+        if (!tip) return;
+        setTimeout(function () {
+            tip.classList.add('visible');
+            setTimeout(function () {
+                tip.classList.remove('visible');
+            }, 5000);
+        }, 4000);
+    })();
 })();
 
 /* ══════════════════════════════════════════════
